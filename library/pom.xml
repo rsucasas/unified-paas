@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>eu.seaclouds-project</groupId>
+        <artifactId>unified-paas</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>unified-paas-library</artifactId>
+    <packaging>jar</packaging>
+    
+    <dependencies>
+        <dependency>
+            <groupId>seaclouds.paas.adapter</groupId>
+            <artifactId>heroku-java-client</artifactId>
+            <classifier>jar-with-dependencies</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.heroku.api</groupId>
+            <artifactId>heroku-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.heroku.api</groupId>
+            <artifactId>heroku-json-jackson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.heroku.api</groupId>
+            <artifactId>heroku-http-apache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
