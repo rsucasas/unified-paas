@@ -31,6 +31,11 @@ public interface Credentials {
         public String getApiKey() {
             return apiKey;
         }
+
+        @Override
+        public String toString() {
+            return String.format("ApiKeyCredentials [apiKey=%s]", apiKey);
+        }
     }
     
 }
