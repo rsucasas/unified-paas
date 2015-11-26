@@ -3,3 +3,4 @@ target
 .settings
 .project
 test-output
+dependency-reduced-pom.xml
