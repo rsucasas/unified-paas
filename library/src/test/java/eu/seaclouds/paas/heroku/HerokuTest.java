@@ -25,7 +25,6 @@ public class HerokuTest {
         PaasSession session = client.getSession(new Credentials.ApiKeyCredentials(apiKey));
         
         String path = this.getClass().getResource("/SampleApp1.war").getFile();
-//        String path = "D:/uploads/SampleApp1.war";
         eu.seaclouds.paas.Module m = session.deploy(APP_NAME, new DeployParameters(path));
 
         assertNotNull(m);

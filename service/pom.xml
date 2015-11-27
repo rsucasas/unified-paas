@@ -52,23 +52,6 @@
             <artifactId>unified-paas-library</artifactId>
         </dependency>
         <dependency>
-            <groupId>seaclouds.paas.adapter</groupId>
-            <artifactId>heroku-java-client</artifactId>
-            <classifier>jar-with-dependencies</classifier>
-        </dependency>
-        <dependency>
-            <groupId>com.heroku.api</groupId>
-            <artifactId>heroku-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.heroku.api</groupId>
-            <artifactId>heroku-json-jackson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.heroku.api</groupId>
-            <artifactId>heroku-http-apache</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-multipart</artifactId>
         </dependency>
