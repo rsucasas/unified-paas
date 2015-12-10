@@ -2,18 +2,22 @@ package eu.seaclouds.paas;
 
 import java.util.List;
 
-import eu.seaclouds.paas.PaasSession.DeployParameters;
-import eu.seaclouds.paas.PaasSession.StartStopCommand;
 
 public interface PaasSession {
     
     public interface DeployParameters {
-        
+    	String getPath();
+    	String getBuildpackUrl();
     }
 
     public enum StartStopCommand {
         START,
         STOP
+    }
+    
+    public enum ScaleUpDownCommand {
+        UP,
+        DOWN
     }
 
     List<Module> list() throws PaasException;
@@ -23,4 +27,11 @@ public interface PaasSession {
     void undeploy(String moduleName) throws PaasException;
     
     void startStop(Module module, PaasSession.StartStopCommand command) throws PaasException;
+    
+    void scaleUpDown(Module module, PaasSession.ScaleUpDownCommand command) throws PaasException;
+    
+    void bindToService(Module module) throws PaasException;
+    
+    Module getModule(String moduleName) throws PaasException;
+    
 }
