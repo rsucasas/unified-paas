@@ -24,7 +24,7 @@ public class CloudFoundryClient implements PaasClient
 		}
 		else
 		{
-			throw new UnsupportedOperationException("Credentials of class " + credentials.getClass().getName() + " not supported for Cloud Foundry client");
+			throw new UnsupportedOperationException("Credentials of class " + credentials.getClass().getName() + " not supported (Cloud Foundry)");
 		}
 		
 		return session;

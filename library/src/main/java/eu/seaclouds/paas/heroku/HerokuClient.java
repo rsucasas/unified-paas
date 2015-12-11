@@ -21,7 +21,7 @@ public class HerokuClient implements PaasClient {
             
         } else {
             
-            throw new UnsupportedOperationException("Credentials of class " + credentials.getClass().getName() + " not supported for Heroku client");
+            throw new UnsupportedOperationException("Credentials of class " + credentials.getClass().getName() + " not supported (Heroku)");
         }
         
         return session;

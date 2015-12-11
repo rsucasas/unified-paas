@@ -45,7 +45,7 @@ public class Module implements eu.seaclouds.paas.Module {
 	@Override
 	public int getRunningInstances()
 	{
-		return app.getRunningInstances();
+		return app.getInstances(); //.getRunningInstances();
 	}
 	
 

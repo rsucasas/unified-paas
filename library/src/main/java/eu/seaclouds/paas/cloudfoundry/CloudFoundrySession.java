@@ -62,6 +62,7 @@ public class CloudFoundrySession implements PaasSession {
 	@Override
 	public void startStop(Module module, StartStopCommand command) throws PaasException
 	{
+		logger.info(command.name() + "({})", module.getName());
 		switch (command)
     	{
     		case START:
@@ -73,7 +74,7 @@ public class CloudFoundrySession implements PaasSession {
     			break;
     			
     		default:
-    			throw new UnsupportedOperationException(command.name() + " method not supported");
+    			throw new UnsupportedOperationException(command.name() + " command not supported (Cloud Foundry)");
     	}
 	}
 
@@ -81,20 +82,51 @@ public class CloudFoundrySession implements PaasSession {
 	@Override
 	public void scaleUpDown(Module module, ScaleUpDownCommand command) throws PaasException
 	{
+		logger.info(command.name() + "({})", module.getName());
 		switch (command)
     	{
-    		case UP:
+    		case SCALE_UP_INSTANCES:
     			connector.getConnectedClient().updateApplicationInstances(module.getName(), module.getRunningInstances() + 1);
     			break;
     			
-    		case DOWN:
+    		case SCALE_DOWN_INSTANCES:
     			if (module.getRunningInstances() > 1) {
     				connector.getConnectedClient().updateApplicationInstances(module.getName(), module.getRunningInstances() - 1);
     			}
     			break;
     			
+    		case SCALE_UP_MEMORY:
+    			break;
+    			
+    		case SCALE_DOWN_MEMORY:
+    			break;
+    			
     		default:
-    			throw new UnsupportedOperationException(command.name() + " method not supported");
+    			throw new UnsupportedOperationException(command.name() + " command not supported (Cloud Foundry)");
+    	}
+	}
+	
+	
+	@Override
+	public void scale(Module module, ScaleCommand command, int scale_value) throws PaasException
+	{
+		logger.info(command.name() + "({})", module.getName());
+		switch (command)
+    	{
+    		case SCALE_INSTANCES:
+    			connector.getConnectedClient().updateApplicationInstances(module.getName(), scale_value);
+    			break;
+    			
+    		case SCALE_MEMORY:
+    			connector.getConnectedClient().updateApplicationMemory(module.getName(), scale_value);
+    			break;
+    			
+    		case SCALE_DISK:
+    			connector.getConnectedClient().updateApplicationDiskQuota(module.getName(), scale_value);
+    			break;
+    			
+    		default:
+    			throw new UnsupportedOperationException(command.name() + " command not supported (Heroku)");
     	}
 	}
 
@@ -109,6 +141,7 @@ public class CloudFoundrySession implements PaasSession {
 	@Override
 	public Module getModule(String moduleName) throws PaasException
 	{
+		logger.info("getModule({})", moduleName);
 		CloudApplication app = connector.getConnectedClient().getApplication(moduleName);
 		if (app == null) {
 			throw new PaasException("Application " + moduleName + " is NULL");

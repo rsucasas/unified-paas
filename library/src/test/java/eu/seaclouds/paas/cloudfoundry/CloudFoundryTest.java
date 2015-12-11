@@ -8,6 +8,7 @@ import eu.seaclouds.paas.Credentials;
 import eu.seaclouds.paas.PaasClient;
 import eu.seaclouds.paas.PaasClientFactory;
 import eu.seaclouds.paas.PaasSession;
+import eu.seaclouds.paas.PaasSession.ScaleUpDownCommand;
 import eu.seaclouds.paas.PaasSession.StartStopCommand;
 
 
@@ -57,40 +58,48 @@ public class CloudFoundryTest
 
     @Test
     public void deploy() {
-    	System.out.println("### TEST .... deploy()");
+    	System.out.println("### TEST > CloudFoundryTest > deploy()");
 
         String path = this.getClass().getResource("/SampleApp1.war").getFile();
         eu.seaclouds.paas.Module m = session.deploy(APP_NAME, new DeployParameters(path));
 
         assertNotNull(m);
-        System.out.println(String.format("name='%s',  url='%s'", m.getName(), m.getUrl()));
+        System.out.println("### >> " + String.format("name='%s',  url='%s'", m.getName(), m.getUrl()));
         assertEquals(APP_NAME, m.getName());
     }
     
-    
+    /*
     @Test
     public void stop() {
-    	System.out.println("### TEST .... stop()");
+    	System.out.println("### TEST > CloudFoundryTest > stop()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
 
         session.startStop(m, StartStopCommand.STOP);
+        
+        m = session.getModule(APP_NAME);
+        System.out.println("### >> running instances: " + m.getRunningInstances());
+        assertEquals(0, m.getRunningInstances());
     }
     
     
     @Test
     public void start() {
-    	System.out.println("### TEST .... start()");
+    	System.out.println("### TEST > CloudFoundryTest > start()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
 
         session.startStop(m, StartStopCommand.START);
+        
+        m = session.getModule(APP_NAME);
+        System.out.println("### >> running instances: " + m.getRunningInstances());
+        assertEquals(1, m.getRunningInstances());
     }
-
+    */
     
     @Test
     public void undeploy() {
-    	System.out.println("### TEST .... undeploy()");
+    	System.out.println("### TEST > CloudFoundryTest > undeploy()");
 
         session.undeploy(APP_NAME);
     }

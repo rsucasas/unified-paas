@@ -30,13 +30,11 @@ public class HerokuSession implements PaasSession {
 
     @Override
     public Module deploy(String moduleName, PaasSession.DeployParameters params) throws PaasException {
-        eu.seaclouds.paas.heroku.DeployParameters _params = (eu.seaclouds.paas.heroku.DeployParameters) params;
-        
         logger.info("deploy({})" + moduleName);
         App app = connector.createJavaWebApp(moduleName);
         
         Module module = new eu.seaclouds.paas.heroku.Module(app);
-        boolean deployed = connector.deployJavaWebApp(module.getName(), _params.getPath());
+        boolean deployed = connector.deployJavaWebApp(module.getName(), params.getPath());
         
         if (!deployed) {
             throw new PaasException("Application not deployed");
@@ -66,7 +64,7 @@ public class HerokuSession implements PaasSession {
     			break;
     			
     		default:
-    			throw new UnsupportedOperationException(command.name() + " method not supported");
+    			throw new UnsupportedOperationException(command.name() + " command not supported (Heroku)");
     	}
     }
 
@@ -77,18 +75,38 @@ public class HerokuSession implements PaasSession {
 		logger.info(command.name() + "({})", module.getName());
 		switch (command)
     	{
-    		case UP:
+    		case SCALE_UP_INSTANCES:
     			connector.getHerokuAPIClient().scaleProcess(module.getName(), module.getAppType(), module.getRunningInstances() + 1);
     			break;
     			
-    		case DOWN:
+    		case SCALE_DOWN_INSTANCES:
     			if (module.getRunningInstances() > 1) {
     				connector.getHerokuAPIClient().scaleProcess(module.getName(), module.getAppType(), module.getRunningInstances() - 1);
     			}
     			break;
     			
+    		case SCALE_UP_MEMORY:
+    		case SCALE_DOWN_MEMORY:
     		default:
-    			throw new UnsupportedOperationException(command.name() + " method not supported");
+    			throw new UnsupportedOperationException(command.name() + " command not supported (Heroku)");
+    	}
+	}
+	
+	
+	@Override
+	public void scale(Module module, ScaleCommand command, int scale_value) throws PaasException
+	{
+		logger.info(command.name() + "({})", module.getName());
+		switch (command)
+    	{
+    		case SCALE_INSTANCES:
+    			connector.getHerokuAPIClient().scaleProcess(module.getName(), module.getAppType(), scale_value);
+    			break;
+    			
+    		case SCALE_MEMORY:
+    		case SCALE_DISK:
+    		default:
+    			throw new UnsupportedOperationException(command.name() + " command not supported (Heroku)");
     	}
 	}
 
@@ -103,6 +121,7 @@ public class HerokuSession implements PaasSession {
 	@Override
 	public Module getModule(String moduleName) throws PaasException
 	{
+		logger.info("getModule({})", moduleName);
 		App app = connector.getHerokuAPIClient().getApp(moduleName);
 		if (app == null) {
 			throw new PaasException("Application " + moduleName + " is NULL");
