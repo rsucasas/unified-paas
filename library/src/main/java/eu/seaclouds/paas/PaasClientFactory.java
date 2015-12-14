@@ -11,6 +11,8 @@ public class PaasClientFactory {
 	        case "heroku":
 	            return new HerokuClient();
 	        case "cloudfoundry":
+	        case "bluemix":
+	        case "pivotal":
 	            return new CloudFoundryClient();
 	        default:
 	            throw new IllegalArgumentException("Provider " + provider + " not supported");
