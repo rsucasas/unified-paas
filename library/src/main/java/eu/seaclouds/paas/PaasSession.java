@@ -30,10 +30,28 @@ public interface PaasSession {
 
     List<Module> list() throws PaasException;
     
+    /**
+     * 
+     * @param moduleName
+     * @param params
+     * @return
+     * @throws PaasException
+     */
     Module deploy(String moduleName, PaasSession.DeployParameters params) throws PaasException;
     
+    /**
+     * 
+     * @param moduleName
+     * @throws PaasException
+     */
     void undeploy(String moduleName) throws PaasException;
     
+    /**
+     * 
+     * @param module
+     * @param command
+     * @throws PaasException
+     */
     void startStop(Module module, PaasSession.StartStopCommand command) throws PaasException;
     
     /**
@@ -62,8 +80,20 @@ public interface PaasSession {
      */
     void scale(Module module, PaasSession.ScaleCommand command, int scale_value) throws PaasException;
     
-    void bindToService(Module module) throws PaasException;
+    /**
+     * 
+     * @param module
+     * @param service
+     * @throws PaasException
+     */
+    void bindToService(Module module, ServiceApp service) throws PaasException;
     
+    /**
+     * 
+     * @param moduleName
+     * @return
+     * @throws PaasException
+     */
     Module getModule(String moduleName) throws PaasException;
     
 }

@@ -3,10 +3,12 @@ package eu.seaclouds.paas.heroku;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.heroku.api.AddonChange;
 import com.heroku.api.App;
 import eu.seaclouds.paas.Module;
 import eu.seaclouds.paas.PaasException;
 import eu.seaclouds.paas.PaasSession;
+import eu.seaclouds.paas.ServiceApp;
 
 
 public class HerokuSession implements PaasSession {
@@ -112,9 +114,11 @@ public class HerokuSession implements PaasSession {
 
 
 	@Override
-	public void bindToService(Module module) throws PaasException
+	public void bindToService(Module module, ServiceApp service) throws PaasException
 	{
-		throw new UnsupportedOperationException("BindToService method not implemented");
+		AddonChange change = connector.getHerokuAPIClient().addAddon(module.getName(), service.getServiceName());
+		
+		
 	}
 
 

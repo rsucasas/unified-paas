@@ -8,6 +8,7 @@ import eu.seaclouds.paas.Credentials;
 import eu.seaclouds.paas.PaasClient;
 import eu.seaclouds.paas.PaasClientFactory;
 import eu.seaclouds.paas.PaasSession;
+import eu.seaclouds.paas.ServiceApp;
 import eu.seaclouds.paas.PaasSession.ScaleUpDownCommand;
 import eu.seaclouds.paas.PaasSession.StartStopCommand;
 
@@ -66,6 +67,19 @@ public class CloudFoundryTest
         assertNotNull(m);
         System.out.println("### >> " + String.format("name='%s',  url='%s'", m.getName(), m.getUrl()));
         assertEquals(APP_NAME, m.getName());
+    }
+    
+    
+    @Test
+    public void bindToService() {
+    	System.out.println("### TEST > CloudFoundryTest > bindToService()");
+
+    	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
+    	ServiceApp service = new ServiceApp("cleardb");
+    	service.setServiceInstanceName("mycleardb");
+    	service.setServicePlan("spark");
+    	
+        session.bindToService(m, service);
     }
     
     /*

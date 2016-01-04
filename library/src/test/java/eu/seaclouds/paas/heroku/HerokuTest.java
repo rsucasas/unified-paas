@@ -8,6 +8,7 @@ import eu.seaclouds.paas.PaasClient;
 import eu.seaclouds.paas.PaasClientFactory;
 import eu.seaclouds.paas.PaasSession;
 import eu.seaclouds.paas.PaasSession.StartStopCommand;
+import eu.seaclouds.paas.ServiceApp;
 
 
 public class HerokuTest {
@@ -48,6 +49,17 @@ public class HerokuTest {
         System.out.println("### >> " + String.format("name='%s',  url='%s'", m.getName(), m.getUrl()));
         assertEquals(APP_NAME, m.getName());
         assertEquals("https://" + APP_NAME + ".herokuapp.com/", m.getUrl());
+    }
+    
+    
+    @Test
+    public void bindToService() {
+    	System.out.println("### TEST > HerokuTest > bindToService()");
+
+    	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
+    	ServiceApp service = new ServiceApp("cleardb:ignite");
+    	
+        session.bindToService(m, service);
     }
     
     /*
