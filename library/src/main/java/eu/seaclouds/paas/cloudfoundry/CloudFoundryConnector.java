@@ -157,14 +157,13 @@ public class CloudFoundryConnector
 	 * @param serviceOffered
 	 * @param serviceName
 	 * @param servicePlan
-	 * @param freePlan
 	 */
 	public void deployAppWithDatabase(String applicationName, String domainName, String warFile, String buildpackUrl,
-			String serviceOffered, String serviceName, String servicePlan, boolean freePlan)
+			String serviceOffered, String serviceName, String servicePlan)
 	{
 		// 1. Create service
 		// http://docs.cloudfoundry.org/devguide/services/managing-services.html
-		CloudService cs = createService(serviceOffered, serviceName, servicePlan, freePlan);
+		CloudService cs = createService(serviceOffered, serviceName, servicePlan);
 
 		// 2. Create application
 		CloudApplication app = createApplication(applicationName, domainName, buildpackUrl);
@@ -200,9 +199,9 @@ public class CloudFoundryConnector
 	 * @param freePlan
 	 */
 	public void deployAppWithDatabase(String applicationName, String warFile, String buildpackUrl,
-			String serviceOffered, String serviceName, String servicePlan, boolean freePlan)
+			String serviceOffered, String serviceName, String servicePlan)
 	{
-		deployAppWithDatabase(applicationName, "", warFile, buildpackUrl, serviceOffered, serviceName, servicePlan, freePlan);
+		deployAppWithDatabase(applicationName, "", warFile, buildpackUrl, serviceOffered, serviceName, servicePlan);
 	}
 
 
@@ -347,10 +346,9 @@ public class CloudFoundryConnector
 	 * @param serviceOffered
 	 * @param serviceName
 	 * @param servicePlan
-	 * @param freePlan
 	 * @return
 	 */
-	private CloudService createService(String serviceOffered, String serviceName, String servicePlan, boolean freePlan)
+	public CloudService createService(String serviceOffered, String serviceName, String servicePlan)
 	{
 		logger.info(">> Looking for installed services ... ");
 		CloudService cs = _cfclient.getService(serviceName);
@@ -384,22 +382,12 @@ public class CloudFoundryConnector
 					List<CloudServicePlan> lPlans = cservice.getCloudServicePlans();
 					for (CloudServicePlan plan : lPlans)
 					{
-						// select the first free plan
-						if (freePlan)
-						{
-							if (plan.isFree())
-							{
-								newService.setPlan(plan.getName());
-								break;
-							}
-						}
 						// look for a plan with name = 'servicePlan'
-						else
-							if (plan.getName().equalsIgnoreCase(servicePlan))
-							{
-								newService.setPlan(servicePlan);
-								break;
-							}
+						if (plan.getName().equalsIgnoreCase(servicePlan))
+						{
+							newService.setPlan(servicePlan);
+							break;
+						}
 					}
 
 					if (newService.getPlan() != null)

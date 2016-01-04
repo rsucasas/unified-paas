@@ -2,11 +2,13 @@ package eu.seaclouds.paas.cloudfoundry;
 
 import java.util.List;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
+import org.cloudfoundry.client.lib.domain.CloudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import eu.seaclouds.paas.Module;
 import eu.seaclouds.paas.PaasException;
 import eu.seaclouds.paas.PaasSession;
+import eu.seaclouds.paas.ServiceApp;
 
 
 /**
@@ -132,9 +134,15 @@ public class CloudFoundrySession implements PaasSession {
 
 
 	@Override
-	public void bindToService(Module module) throws PaasException
+	public void bindToService(Module module, ServiceApp service) throws PaasException
 	{
-		throw new UnsupportedOperationException("BindToService method not implemented");
+		CloudService cs = connector.createService(service.getServiceName(), service.getServiceInstanceName(), service.getServicePlan());
+		if (cs != null)
+		{
+			// bind to service
+			logger.info(">> Binding application to service [" + service.getServiceInstanceName() + "] ... ");
+			connector.getConnectedClient().bindService(module.getName(), service.getServiceInstanceName());
+		}
 	}
 
 
