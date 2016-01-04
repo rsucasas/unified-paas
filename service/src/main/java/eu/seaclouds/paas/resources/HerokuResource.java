@@ -8,7 +8,9 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
@@ -23,6 +25,7 @@ import eu.seaclouds.paas.Credentials;
 import eu.seaclouds.paas.Module;
 import eu.seaclouds.paas.PaasClient;
 import eu.seaclouds.paas.PaasSession;
+import eu.seaclouds.paas.ServiceApp;
 import eu.seaclouds.paas.data.Application;
 import eu.seaclouds.paas.heroku.DeployParameters;
 
@@ -113,6 +116,26 @@ public class HerokuResource extends PaaSResource
 		}
 		log.info("Application {} created", application.getName());
 		return result;
+	}
+	
+	
+	@PUT
+	@Path("/applications/{name}/bind/{service}")
+	@Override
+	public String bindApplication(@PathParam("name") String name, @PathParam("service") String service, @Context HttpHeaders headers)
+	{
+		log.info("bindApplication({}, {})", name, service);
+		Credentials credentials = extractCredentials(headers);
+		PaasSession session = client.getSession(credentials);
+		
+		Module m = session.getModule(name);
+		// heroku ... cleardb:ignite
+		ServiceApp serviceapp = new ServiceApp(service);
+    	
+        session.bindToService(m, serviceapp);
+		
+		// TODO implement method
+		return "put /applications/" + name + "/bind/" + service;
 	}
 
 

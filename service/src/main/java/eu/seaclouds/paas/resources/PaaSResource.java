@@ -233,13 +233,15 @@ public abstract class PaaSResource
 	}
 	
 	
-	@PUT
-	@Path("/applications/{name}/bind/{service}")
-	public String bindApplication(@PathParam("name") String name, @PathParam("service") String service, @Context HttpHeaders headers)
-	{
-		// TODO implement method
-		return "put /applications/" + name + "/bind/ + service";
-	}
+	/**
+	 * 
+	 * @param name
+	 * @param service
+	 * @param headers
+	 * @return
+	 */
+	public abstract String bindApplication(@PathParam("name") String name, @PathParam("service") String service, 
+			@Context HttpHeaders headers);
 
 	
 	/**
