@@ -43,7 +43,7 @@ public class CloudFoundrySession implements PaasSession {
 	@Override
 	public Module deploy(String moduleName, DeployParameters params) throws PaasException
 	{
-		logger.info("deploy({})" + moduleName);
+		logger.info("deploy({})", moduleName);
 		if (!connector.deployApp(moduleName, params.getPath(), params.getBuildpackUrl()))
 		{
 			throw new PaasException("Application not deployed");
@@ -161,8 +161,10 @@ public class CloudFoundrySession implements PaasSession {
 		logger.info("getModule({})", moduleName);
 		CloudApplication app = connector.getConnectedClient().getApplication(moduleName);
 		if (app == null) {
+			logger.info("getModule({}): app is NULL", moduleName);
 			throw new PaasException("Application " + moduleName + " is NULL");
 		}
+		logger.info("getModule({}): return Module - app", moduleName);
 		return new eu.seaclouds.paas.cloudfoundry.Module(app);
 	}
 

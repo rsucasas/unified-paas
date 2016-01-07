@@ -1,5 +1,7 @@
 package eu.seaclouds.paas.cloudfoundry;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
 
 
@@ -29,8 +31,14 @@ public class Module implements eu.seaclouds.paas.Module {
 	@Override
 	public String getUrl()
 	{
-		// TODO get url
-		return app.getUris().get(0);
+		try
+		{
+			return new URL(app.getUris().get(0)).toString();
+		}
+		catch (MalformedURLException ex)
+		{
+			return "http://" + app.getUris().get(0);
+		}
 	}
 	
 
