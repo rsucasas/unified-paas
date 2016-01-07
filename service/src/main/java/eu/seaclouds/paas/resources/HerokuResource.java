@@ -143,12 +143,12 @@ public class HerokuResource extends PaaSResource
 	@Override
 	public String unbindApplication(@PathParam("name") String name, @PathParam("service") String service, @Context HttpHeaders headers)
 	{
-		log.info("bindApplication({}, {})", name, service);
+		log.info("unbindApplication({}, {})", name, service);
 		Credentials credentials = extractCredentials(headers);
 		PaasSession session = client.getSession(credentials);
 		
 		Module m = session.getModule(name);
-		// heroku ... cleardb:ignite
+		// heroku ... cleardb
 		ServiceApp serviceapp = new ServiceApp(service);
     	
         session.unbindFromService(m, serviceapp);
