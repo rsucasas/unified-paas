@@ -1,15 +1,11 @@
 package eu.seaclouds.paas.resources;
 
 import java.util.List;
-import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,24 +31,20 @@ public abstract class CFBasedResource extends PaaSResource
 	{
 		super(client);
 	}
-	
-	
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	@Override
-	public String index()
-	{
-		return "index - CloudFoundry based resource";
-	}
-	
+
 	
 	@PUT
 	@Path("/applications/{name}/bind/{service}")
 	@Override
-	public String bindApplication(@PathParam("name") String name, @PathParam("service") String service, @Context HttpHeaders headers)
+	public Response bindApplication(@PathParam("name") String name, @PathParam("service") String service, @Context HttpHeaders headers)
 	{
 		log.info("bindApplication({}, {})", name, service);
 		Credentials credentials = extractCredentials(headers);
+		if (credentials == null) {
+			// Error Response
+			return generateCredentialsErrorJSONResponse("PUT /applications/" + name + "/bind/" + service);
+		}
+		
 		PaasSession session = client.getSession(credentials);
 		
 		Module m = session.getModule(name);
@@ -67,24 +59,34 @@ public abstract class CFBasedResource extends PaaSResource
 			serviceapp.setServicePlan(servValues[2]);
 	    	
 	        session.bindToService(m, serviceapp);
-
 		}
 		else
 		{
-			throw new WebApplicationException("Credentials not found in request headers", Response.Status.BAD_REQUEST);
+			// Response
+		    return generateJSONResponse(Response.Status.BAD_REQUEST, OperationResult.ERROR,
+									    "PUT /applications/" + name + "/bind/" + service, 
+									    "Credentials not found in request headers / lenght != 3");
 		}
 
-		return "put /applications/" + name + "/bind/" + service;
+		// Response
+	    return generateJSONResponse(Response.Status.OK, OperationResult.OK,
+								    "PUT /applications/" + name + "/bind/" + service, 
+								    "service " + service + " binded to app: " + name);
 	}
 	
 	
 	@PUT
 	@Path("/applications/{name}/unbind/{service}")
 	@Override
-	public String unbindApplication(@PathParam("name") String name, @PathParam("service") String service, @Context HttpHeaders headers)
+	public Response unbindApplication(@PathParam("name") String name, @PathParam("service") String service, @Context HttpHeaders headers)
 	{
 		log.info("unbindApplication({}, {})", name, service);
 		Credentials credentials = extractCredentials(headers);
+		if (credentials == null) {
+			// Error Response
+			return generateCredentialsErrorJSONResponse("PUT /applications/" + name + "/unbind/" + service);
+		}
+		
 		PaasSession session = client.getSession(credentials);
 		
 		Module m = session.getModule(name);
@@ -99,14 +101,12 @@ public abstract class CFBasedResource extends PaaSResource
 			serviceapp.setServicePlan(servValues[2]);
 	    	
 	        session.unbindFromService(m, serviceapp);
-
 		}
-		else
-		{
-			throw new WebApplicationException("Credentials not found in request headers", Response.Status.BAD_REQUEST);
-		}
-
-		return "put /applications/" + name + "/bind/" + service;
+		
+		// Response
+	    return generateJSONResponse(Response.Status.OK, OperationResult.OK,
+								    "PUT /applications/" + name + "/unbind/" + service, 
+								    "service " + service + " unbinded from app: " + name);
 	}
 
 
@@ -118,15 +118,12 @@ public abstract class CFBasedResource extends PaaSResource
 		log.debug("Checking credentials [CloudFoundry] ...");
 
 		List<String> crs = headers.getRequestHeader("credentials");
-		if (crs != null && !crs.isEmpty())
+		if (crs != null && !crs.isEmpty() && crs.size()==6)
 		{
 			credentials = new Credentials.ApiUserPasswordOrgSpaceCredentials(
-					crs.get(0), crs.get(1), crs.get(2), crs.get(3), crs.get(5), Boolean.valueOf(crs.get(6)));
+					crs.get(0), crs.get(1), crs.get(2), crs.get(3), crs.get(4), Boolean.valueOf(crs.get(5)));
 		}
-		else
-		{
-			throw new WebApplicationException("Credentials not found in request headers", Response.Status.BAD_REQUEST);
-		}
+
 		return credentials;
 	}
 	
