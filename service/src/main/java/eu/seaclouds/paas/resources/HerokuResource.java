@@ -133,9 +133,27 @@ public class HerokuResource extends PaaSResource
 		ServiceApp serviceapp = new ServiceApp(service);
     	
         session.bindToService(m, serviceapp);
+
+		return ">> put /applications/" + name + "/bind/" + service;
+	}
+	
+	
+	@PUT
+	@Path("/applications/{name}/unbind/{service}")
+	@Override
+	public String unbindApplication(@PathParam("name") String name, @PathParam("service") String service, @Context HttpHeaders headers)
+	{
+		log.info("bindApplication({}, {})", name, service);
+		Credentials credentials = extractCredentials(headers);
+		PaasSession session = client.getSession(credentials);
 		
-		// TODO implement method
-		return "put /applications/" + name + "/bind/" + service;
+		Module m = session.getModule(name);
+		// heroku ... cleardb:ignite
+		ServiceApp serviceapp = new ServiceApp(service);
+    	
+        session.unbindFromService(m, serviceapp);
+
+		return ">> put /applications/" + name + "/unbind/" + service;
 	}
 
 

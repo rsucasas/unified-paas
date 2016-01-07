@@ -138,7 +138,7 @@ public abstract class PaaSResource
 		
 		Module m = session.getModule(name);
 		log.debug("application " + m.getName() + " : " + m.getUrl());
-		return "get /applications/" + name;
+		return m.getUrl();
 	}
 
 
@@ -152,7 +152,7 @@ public abstract class PaaSResource
 
 		session.undeploy(name);
 		log.debug("application {} deleted", name);
-		return "delete /applications/" + name;
+		return ">> delete /applications/" + name;
 	}
 
 
@@ -168,7 +168,7 @@ public abstract class PaaSResource
 	    session.startStop(m, StartStopCommand.START);
 	    
 	    log.debug("application {} started", name);
-		return "put /applications/" + name + "/start";
+	    return m.getUrl();
 	}
 
 
@@ -181,10 +181,10 @@ public abstract class PaaSResource
 		PaasSession session = client.getSession(credentials);
 
 		Module m = session.getModule(name);
-	    session.startStop(m, StartStopCommand.START);
+	    session.startStop(m, StartStopCommand.STOP);
 	    
 	    log.debug("application {} stopped", name);
-		return "put /applications/" + name + "/stop";
+		return ">> put /applications/" + name + "/stop";
 	}
 	
 	
@@ -205,7 +205,7 @@ public abstract class PaaSResource
 			log.error("application {} not scaled", name);
 	    
 	    log.debug("application {} scaled {}", name, updown);
-		return "put /applications/" + name + "/scale/" + updown;
+		return ">> put /applications/" + name + "/scale/" + updown;
 	}
 	
 	
@@ -229,7 +229,7 @@ public abstract class PaaSResource
 			log.error("application {} not scaled", name);
 	    
 	    log.debug("application {} scaled {} - {}", name, type, value);
-		return "put /applications/" + name + "/scale/" + type + "/" + value;
+		return ">> put /applications/" + name + "/scale/" + type + "/" + value;
 	}
 	
 	
@@ -241,6 +241,17 @@ public abstract class PaaSResource
 	 * @return
 	 */
 	public abstract String bindApplication(@PathParam("name") String name, @PathParam("service") String service, 
+			@Context HttpHeaders headers);
+	
+	
+	/**
+	 * 
+	 * @param name
+	 * @param service
+	 * @param headers
+	 * @return
+	 */
+	public abstract String unbindApplication(@PathParam("name") String name, @PathParam("service") String service, 
 			@Context HttpHeaders headers);
 
 	

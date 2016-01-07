@@ -88,6 +88,16 @@ public interface PaasSession {
      */
     void bindToService(Module module, ServiceApp service) throws PaasException;
     
+    
+    /**
+     * 
+     * @param module
+     * @param service
+     * @throws PaasException
+     */
+    void unbindFromService(Module module, ServiceApp service) throws PaasException;
+    
+    
     /**
      * 
      * @param moduleName
