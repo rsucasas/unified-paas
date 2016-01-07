@@ -118,9 +118,16 @@ public class HerokuSession implements PaasSession {
 	{
 		AddonChange change = connector.getHerokuAPIClient().addAddon(module.getName(), service.getServiceName());
 		
-		
 	}
 
+
+	@Override
+	public void unbindFromService(Module module, ServiceApp service) throws PaasException
+	{
+		AddonChange change = connector.getHerokuAPIClient().removeAddon(module.getName(), service.getServiceName());
+		
+	}
+	
 
 	@Override
 	public Module getModule(String moduleName) throws PaasException

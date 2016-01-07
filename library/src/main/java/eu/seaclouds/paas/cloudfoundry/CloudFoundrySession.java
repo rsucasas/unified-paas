@@ -144,6 +144,15 @@ public class CloudFoundrySession implements PaasSession {
 			connector.getConnectedClient().bindService(module.getName(), service.getServiceInstanceName());
 		}
 	}
+	
+	
+	@Override
+	public void unbindFromService(Module module, ServiceApp service) throws PaasException
+	{
+		//CloudServiceInstance csi = connector.getConnectedClient().getServiceInstance(service.getServiceInstanceName());
+		connector.getConnectedClient().unbindService(module.getName(), service.getServiceInstanceName());
+		
+	}
 
 
 	@Override
@@ -156,6 +165,6 @@ public class CloudFoundrySession implements PaasSession {
 		}
 		return new eu.seaclouds.paas.cloudfoundry.Module(app);
 	}
-	
+
 
 }
