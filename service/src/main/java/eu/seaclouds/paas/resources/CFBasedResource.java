@@ -76,6 +76,38 @@ public abstract class CFBasedResource extends PaaSResource
 
 		return "put /applications/" + name + "/bind/" + service;
 	}
+	
+	
+	@PUT
+	@Path("/applications/{name}/unbind/{service}")
+	@Override
+	public String unbindApplication(@PathParam("name") String name, @PathParam("service") String service, @Context HttpHeaders headers)
+	{
+		log.info("unbindApplication({}, {})", name, service);
+		Credentials credentials = extractCredentials(headers);
+		PaasSession session = client.getSession(credentials);
+		
+		Module m = session.getModule(name);
+		
+		// cloud foundry ... cleardb:mycleardb:spark
+		String[] servValues = service.split(":");
+		
+		if (servValues.length == 3)
+		{
+			ServiceApp serviceapp = new ServiceApp(servValues[0]);
+			serviceapp.setServiceInstanceName(servValues[1]);
+			serviceapp.setServicePlan(servValues[2]);
+	    	
+	        session.unbindFromService(m, serviceapp);
+
+		}
+		else
+		{
+			throw new WebApplicationException("Credentials not found in request headers", Response.Status.BAD_REQUEST);
+		}
+
+		return "put /applications/" + name + "/bind/" + service;
+	}
 
 
 	@Override
