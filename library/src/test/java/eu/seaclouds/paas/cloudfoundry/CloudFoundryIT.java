@@ -12,17 +12,22 @@ import eu.seaclouds.paas.PaasClient;
 import eu.seaclouds.paas.PaasClientFactory;
 import eu.seaclouds.paas.PaasException;
 import eu.seaclouds.paas.PaasSession;
+import eu.seaclouds.paas.PaasSession.ScaleUpDownCommand;
 import eu.seaclouds.paas.PaasSession.StartStopCommand;
+import eu.seaclouds.paas.ServiceApp;
 
 
 /**
- * 
- * @author 
+ * Integration tests:
+ * 		http://maven.apache.org/surefire/maven-failsafe-plugin/examples/testng.html
+ * 		http://stackoverflow.com/questions/2669576/order-of-execution-of-tests-in-testng
+ * 		http://zeroturnaround.com/rebellabs/the-correct-way-to-use-integration-tests-in-your-build-process/
+ * @author rsucasas
  *
  */
-public class CloudFoundryTest
+public class CloudFoundryIT
 {
-
+	
 	
 	// Cloud Foundry PaaS providers 
 	// 		PIVOTAL = "https://api.run.pivotal.io"
@@ -34,28 +39,29 @@ public class CloudFoundryTest
 	private static final String SPACE = "development";
 	private static final boolean TRUST_SELF_SIGNED_CERTS = true;
 	
-	//
-	private static final String APP_NAME = "unified-paas-cloudfoundry-test";
+	// Application
+	private static final String APP_NAME = "unified-paas-cloudfoundry-test2";
+	private static final String SERV_NAME = "mycleardb2";
 	
-	//
+	// session
 	private PaasSession session;
-    
-
-    @BeforeTest
+	
+	
+	@BeforeTest
     public void initialize()
     {
         // login / connect to PaaS
         PaasClient client = new PaasClientFactory().getClient("cloudfoundry");
         session = client.getSession(new Credentials.ApiUserPasswordOrgSpaceCredentials(API_URL, 
-				   System.getenv("cf_user"), 
-				   System.getenv("cf_password"), 
-				   ORG, 
-				   SPACE, 
-				   TRUST_SELF_SIGNED_CERTS));
+        																			   System.getenv("cf_user"), 
+        																			   System.getenv("cf_password"), 
+        																			   ORG, 
+        																			   SPACE, 
+        																			   TRUST_SELF_SIGNED_CERTS));
     }
     
-    
-    /**
+
+	/**
 	 * 
 	 * @param m
 	 * @param exeFunc
@@ -89,17 +95,16 @@ public class CloudFoundryTest
 
 		return false;
 	}
-    
-
+	
+	
     @Test
     public void deploy() {
     	System.out.println("### TEST > CloudFoundryTest > deploy()");
 
         String path = this.getClass().getResource("/SampleApp1.war").getFile();
         eu.seaclouds.paas.Module m = session.deploy(APP_NAME, new DeployParameters(path));
-
         assertNotNull(m);
-        System.out.println("### >> " + String.format("name='%s',  url='%s'", m.getName(), m.getUrl()));
+        System.out.println("         > " + String.format("name='%s',  url='%s'", m.getName(), m.getUrl()));
         assertEquals(APP_NAME, m.getName());
         
         if (!checkResult(m, "deploying / starting application", "instances", 1, 10))
@@ -108,13 +113,13 @@ public class CloudFoundryTest
         	assertTrue(true);
     }
     
-  
+    
     @Test (dependsOnMethods={"deploy"})
-    public void stop() {
+    public void stop() 
+    {
     	System.out.println("### TEST > CloudFoundryTest > stop()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
-
         session.startStop(m, StartStopCommand.STOP);
         
         if (!checkResult(m, "stopping application", "instances", 0, 2))
@@ -129,7 +134,6 @@ public class CloudFoundryTest
     	System.out.println("### TEST > CloudFoundryTest > start()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
-
         session.startStop(m, StartStopCommand.START);
         
         if (!checkResult(m, "starting application", "instances", 1, 5))
@@ -140,6 +144,66 @@ public class CloudFoundryTest
     
     
     @Test (dependsOnMethods={"start"})
+    public void scaleUp() {
+    	System.out.println("### TEST > CloudFoundryTest > scaleUp()");
+
+        eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
+        session.scaleUpDown(m, ScaleUpDownCommand.SCALE_UP_INSTANCES);
+        
+        if (!checkResult(m, "scaling application", "instances", 2, 5))
+        	fail(APP_NAME + " not scaled up");
+        else
+        	assertTrue(true);
+    }
+    
+    
+    @Test (dependsOnMethods={"scaleUp"})
+    public void scaleDown() {
+    	System.out.println("### TEST > CloudFoundryTest > scaleDown()");
+
+        eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
+        session.scaleUpDown(m, ScaleUpDownCommand.SCALE_DOWN_INSTANCES);
+        
+        if (!checkResult(m, "scaling application", "instances", 1, 5))
+        	fail(APP_NAME + " not scaled down");
+        else
+        	assertTrue(true);
+    }
+    
+    
+    @Test (dependsOnMethods={"scaleDown"})
+    public void bindToService() {
+    	System.out.println("### TEST > CloudFoundryTest > bindToService()");
+
+    	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
+    	ServiceApp service = new ServiceApp("cleardb");
+    	service.setServiceInstanceName(SERV_NAME);
+    	service.setServicePlan("spark");
+    	
+        session.bindToService(m, service);
+        
+        m = session.getModule(APP_NAME);
+        assertEquals(1, m.getServices().size());
+    }
+
+    
+    @Test (dependsOnMethods={"bindToService"})
+    public void unbindFromService() {
+    	System.out.println("### TEST > CloudFoundryTest > unbindFromService()");
+
+    	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
+    	ServiceApp service = new ServiceApp("cleardb");
+    	service.setServiceInstanceName(SERV_NAME);
+    	service.setServicePlan("spark");
+    	
+        session.unbindFromService(m, service);
+        
+        m = session.getModule(APP_NAME);
+        assertEquals(0, m.getServices().size());
+    }
+    
+    
+    @Test (dependsOnMethods={"unbindFromService"})
     public void undeploy() {
     	System.out.println("### TEST > CloudFoundryTest > undeploy()");
 
@@ -156,5 +220,4 @@ public class CloudFoundryTest
         }
     }
 
-    
 }
