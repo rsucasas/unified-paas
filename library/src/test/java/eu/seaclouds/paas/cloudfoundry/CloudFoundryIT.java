@@ -99,7 +99,7 @@ public class CloudFoundryIT
 	
     @Test
     public void deploy() {
-    	System.out.println("### TEST > CloudFoundryTest > deploy()");
+    	System.out.println("### TEST > CloudFoundry > deploy()");
 
         String path = this.getClass().getResource("/SampleApp1.war").getFile();
         eu.seaclouds.paas.Module m = session.deploy(APP_NAME, new DeployParameters(path));
@@ -117,7 +117,7 @@ public class CloudFoundryIT
     @Test (dependsOnMethods={"deploy"})
     public void stop() 
     {
-    	System.out.println("### TEST > CloudFoundryTest > stop()");
+    	System.out.println("### TEST > CloudFoundry > stop()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
         session.startStop(m, StartStopCommand.STOP);
@@ -131,7 +131,7 @@ public class CloudFoundryIT
     
     @Test (dependsOnMethods={"stop"})
     public void start() {
-    	System.out.println("### TEST > CloudFoundryTest > start()");
+    	System.out.println("### TEST > CloudFoundry > start()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
         session.startStop(m, StartStopCommand.START);
@@ -145,7 +145,7 @@ public class CloudFoundryIT
     
     @Test (dependsOnMethods={"start"})
     public void scaleUp() {
-    	System.out.println("### TEST > CloudFoundryTest > scaleUp()");
+    	System.out.println("### TEST > CloudFoundry > scaleUp()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
         session.scaleUpDown(m, ScaleUpDownCommand.SCALE_UP_INSTANCES);
@@ -159,7 +159,7 @@ public class CloudFoundryIT
     
     @Test (dependsOnMethods={"scaleUp"})
     public void scaleDown() {
-    	System.out.println("### TEST > CloudFoundryTest > scaleDown()");
+    	System.out.println("### TEST > CloudFoundry > scaleDown()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
         session.scaleUpDown(m, ScaleUpDownCommand.SCALE_DOWN_INSTANCES);
@@ -173,7 +173,7 @@ public class CloudFoundryIT
     
     @Test (dependsOnMethods={"scaleDown"})
     public void bindToService() {
-    	System.out.println("### TEST > CloudFoundryTest > bindToService()");
+    	System.out.println("### TEST > CloudFoundry > bindToService()");
 
     	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
     	ServiceApp service = new ServiceApp("cleardb");
@@ -189,7 +189,7 @@ public class CloudFoundryIT
     
     @Test (dependsOnMethods={"bindToService"})
     public void unbindFromService() {
-    	System.out.println("### TEST > CloudFoundryTest > unbindFromService()");
+    	System.out.println("### TEST > CloudFoundry > unbindFromService()");
 
     	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
     	ServiceApp service = new ServiceApp("cleardb");
@@ -205,13 +205,13 @@ public class CloudFoundryIT
     
     @Test (dependsOnMethods={"unbindFromService"})
     public void undeploy() {
-    	System.out.println("### TEST > CloudFoundryTest > undeploy()");
+    	System.out.println("### TEST > CloudFoundry > undeploy()");
 
         session.undeploy(APP_NAME);
         
         try {
         	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
-        	System.out.println("### TEST > CloudFoundryTest > undeploy() > " + m.getName());
+        	System.out.println("### TEST > CloudFoundry > undeploy() > " + m.getName());
         	fail(APP_NAME + " still exists");
         }
         catch (CloudFoundryException | PaasException ex)
