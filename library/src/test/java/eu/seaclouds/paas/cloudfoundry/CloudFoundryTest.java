@@ -17,8 +17,9 @@ import eu.seaclouds.paas.PaasSession.StartStopCommand;
 
 /**
  * 
- * @author 
  *
+ * @author ATOS
+ * @date 8/1/2016-16:03:52
  */
 public class CloudFoundryTest
 {
@@ -34,10 +35,10 @@ public class CloudFoundryTest
 	private static final String SPACE = "development";
 	private static final boolean TRUST_SELF_SIGNED_CERTS = true;
 	
-	//
+	// Application
 	private static final String APP_NAME = "unified-paas-cloudfoundry-test";
 	
-	//
+	// session
 	private PaasSession session;
     
 
@@ -93,7 +94,7 @@ public class CloudFoundryTest
 
     @Test
     public void deploy() {
-    	System.out.println("### TEST > CloudFoundryTest > deploy()");
+    	System.out.println("### TEST > CloudFoundry > deploy()");
 
         String path = this.getClass().getResource("/SampleApp1.war").getFile();
         eu.seaclouds.paas.Module m = session.deploy(APP_NAME, new DeployParameters(path));
@@ -111,7 +112,7 @@ public class CloudFoundryTest
   
     @Test (dependsOnMethods={"deploy"})
     public void stop() {
-    	System.out.println("### TEST > CloudFoundryTest > stop()");
+    	System.out.println("### TEST > CloudFoundry > stop()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
 
@@ -126,7 +127,7 @@ public class CloudFoundryTest
     
     @Test (dependsOnMethods={"stop"})
     public void start() {
-    	System.out.println("### TEST > CloudFoundryTest > start()");
+    	System.out.println("### TEST > CloudFoundry > start()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
 
@@ -141,13 +142,13 @@ public class CloudFoundryTest
     
     @Test (dependsOnMethods={"start"})
     public void undeploy() {
-    	System.out.println("### TEST > CloudFoundryTest > undeploy()");
+    	System.out.println("### TEST > CloudFoundry > undeploy()");
 
         session.undeploy(APP_NAME);
         
         try {
         	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
-        	System.out.println("### TEST > CloudFoundryTest > undeploy() > " + m.getName());
+        	System.out.println("### TEST > CloudFoundry > undeploy() > " + m.getName());
         	fail(APP_NAME + " still exists");
         }
         catch (CloudFoundryException | PaasException ex)

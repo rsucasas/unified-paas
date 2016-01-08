@@ -4,7 +4,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.heroku.api.Addon;
-import com.heroku.api.AddonChange;
 import com.heroku.api.App;
 import eu.seaclouds.paas.Module;
 import eu.seaclouds.paas.PaasException;
@@ -117,16 +116,16 @@ public class HerokuSession implements PaasSession {
 	@Override
 	public void bindToService(Module module, ServiceApp service) throws PaasException
 	{
-		AddonChange change = connector.getHerokuAPIClient().addAddon(module.getName(), service.getServiceName());
-		
+		//AddonChange change = connector.getHerokuAPIClient().addAddon(module.getName(), service.getServiceName());
+		connector.getHerokuAPIClient().addAddon(module.getName(), service.getServiceName());
 	}
 
 
 	@Override
 	public void unbindFromService(Module module, ServiceApp service) throws PaasException
 	{
-		AddonChange change = connector.getHerokuAPIClient().removeAddon(module.getName(), service.getServiceName());
-		
+		//AddonChange change = connector.getHerokuAPIClient().removeAddon(module.getName(), service.getServiceName());
+		connector.getHerokuAPIClient().removeAddon(module.getName(), service.getServiceName());
 	}
 	
 
