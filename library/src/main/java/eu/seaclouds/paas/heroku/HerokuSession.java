@@ -3,6 +3,7 @@ package eu.seaclouds.paas.heroku;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.heroku.api.Addon;
 import com.heroku.api.AddonChange;
 import com.heroku.api.App;
 import eu.seaclouds.paas.Module;
@@ -134,10 +135,13 @@ public class HerokuSession implements PaasSession {
 	{
 		logger.info("getModule({})", moduleName);
 		App app = connector.getHerokuAPIClient().getApp(moduleName);
+		
+		List<Addon> l = connector.getHerokuAPIClient().listAppAddons(moduleName);
+		
 		if (app == null) {
 			throw new PaasException("Application " + moduleName + " is NULL");
 		}
-		return new eu.seaclouds.paas.heroku.Module(app);
+		return new eu.seaclouds.paas.heroku.Module(app, l);
 	}
     
 

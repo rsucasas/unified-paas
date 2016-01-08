@@ -22,7 +22,7 @@ public class HerokuTest {
     private String username;
     private String password;
     
-    
+    /*
     @BeforeTest
     public void initialize()
     {
@@ -62,7 +62,7 @@ public class HerokuTest {
         session.bindToService(m, service);
     }
     
-    /*
+    
     @Test
     public void stop() {
     	System.out.println("### TEST > HerokuTest > stop()");
@@ -89,7 +89,7 @@ public class HerokuTest {
         System.out.println("### >> running instances: " + m.getRunningInstances());
         assertEquals(1, m.getRunningInstances());
     }
-    */
+   
 
     @Test
     public void undeploy() {
@@ -97,6 +97,6 @@ public class HerokuTest {
 
         session.undeploy(APP_NAME);
     }
-
+ */
     
 }

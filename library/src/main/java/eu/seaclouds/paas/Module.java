@@ -1,5 +1,7 @@
 package eu.seaclouds.paas;
 
+import java.util.List;
+
 public interface Module {
 	
     String getName();
@@ -9,5 +11,7 @@ public interface Module {
     String getAppType();
     
     int getRunningInstances();
+    
+    List<String> getServices();
     
 }

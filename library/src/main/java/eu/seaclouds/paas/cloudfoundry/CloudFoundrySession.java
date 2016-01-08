@@ -147,24 +147,31 @@ public class CloudFoundrySession implements PaasSession {
 	
 	
 	@Override
-	public void unbindFromService(Module module, ServiceApp service) throws PaasException
+	public void unbindFromService(Module module, ServiceApp service)
 	{
-		//CloudServiceInstance csi = connector.getConnectedClient().getServiceInstance(service.getServiceInstanceName());
 		connector.getConnectedClient().unbindService(module.getName(), service.getServiceInstanceName());
-		
+		connector.getConnectedClient().deleteService(service.getServiceInstanceName());
+	}
+	
+	
+	
+	public void resetAccount()
+	{
+		connector.getConnectedClient().deleteAllServices();
+		connector.getConnectedClient().deleteAllApplications();
 	}
 
 
 	@Override
 	public Module getModule(String moduleName) throws PaasException
 	{
-		logger.info("getModule({})", moduleName);
+		logger.debug("getModule({})", moduleName);
 		CloudApplication app = connector.getConnectedClient().getApplication(moduleName);
 		if (app == null) {
-			logger.info("getModule({}): app is NULL", moduleName);
+			logger.debug("getModule({}): app is NULL", moduleName);
 			throw new PaasException("Application " + moduleName + " is NULL");
 		}
-		logger.info("getModule({}): return Module - app", moduleName);
+		logger.debug("getModule({}): return Module - app", moduleName);
 		return new eu.seaclouds.paas.cloudfoundry.Module(app);
 	}
 
