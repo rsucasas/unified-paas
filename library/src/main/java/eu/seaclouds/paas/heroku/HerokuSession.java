@@ -32,7 +32,7 @@ public class HerokuSession implements PaasSession {
 
     @Override
     public Module deploy(String moduleName, PaasSession.DeployParameters params) throws PaasException {
-        logger.info("deploy({})" + moduleName);
+        logger.info("DEPLOY({})", moduleName);
         App app = connector.createJavaWebApp(moduleName);
         
         Module module = new eu.seaclouds.paas.heroku.Module(app);
@@ -47,7 +47,7 @@ public class HerokuSession implements PaasSession {
     
     @Override
     public void undeploy(String moduleName) throws PaasException {
-        logger.info("undeploy({})", moduleName);
+        logger.info("UNDEPLOY({})", moduleName);
         connector.deleteApp(moduleName);
     }
 

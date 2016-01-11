@@ -41,7 +41,7 @@ public class CloudFoundryTest
 	// session
 	private PaasSession session;
     
-
+	/*
     @BeforeTest
     public void initialize()
     {
@@ -56,15 +56,6 @@ public class CloudFoundryTest
     }
     
     
-    /**
-	 * 
-	 * @param m
-	 * @param exeFunc
-	 * @param operation
-	 * @param expectedValue
-	 * @param seconds
-	 * @return
-	 */
 	private boolean checkResult(eu.seaclouds.paas.Module m, String exeFunc, String operation, int expectedValue, int seconds)
 	{
 		for (int i = 0; i < 10; i++)
@@ -156,6 +147,6 @@ public class CloudFoundryTest
         	assertTrue(true);
         }
     }
-
+     */
     
 }
