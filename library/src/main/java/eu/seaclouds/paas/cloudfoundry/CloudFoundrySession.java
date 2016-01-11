@@ -43,7 +43,7 @@ public class CloudFoundrySession implements PaasSession {
 	@Override
 	public Module deploy(String moduleName, DeployParameters params) throws PaasException
 	{
-		logger.info("deploy({})", moduleName);
+		logger.info("DEPLOY({})", moduleName);
 		if (!connector.deployApp(moduleName, params.getPath(), params.getBuildpackUrl()))
 		{
 			throw new PaasException("Application not deployed");
@@ -56,7 +56,7 @@ public class CloudFoundrySession implements PaasSession {
 	@Override
 	public void undeploy(String moduleName) throws PaasException
 	{
-		logger.info("undeploy({})", moduleName);
+		logger.info("UNDEPLOY({})", moduleName);
         connector.deleteApp(moduleName);
 	}
 

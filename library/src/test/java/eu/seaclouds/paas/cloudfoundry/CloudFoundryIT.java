@@ -5,6 +5,8 @@ import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.fail;
 import org.cloudfoundry.client.lib.CloudFoundryException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import eu.seaclouds.paas.Credentials;
@@ -46,7 +48,10 @@ public class CloudFoundryIT
 	// session
 	private PaasSession session;
 	
+	// log
+	private static Logger logger = LoggerFactory.getLogger(CloudFoundryIT.class);
 	
+
 	@BeforeTest
     public void initialize()
     {
@@ -61,28 +66,19 @@ public class CloudFoundryIT
     }
     
 
-	/**
-	 * 
-	 * @param m
-	 * @param exeFunc
-	 * @param operation
-	 * @param expectedValue
-	 * @param seconds
-	 * @return
-	 */
 	private boolean checkResult(eu.seaclouds.paas.Module m, String exeFunc, String operation, int expectedValue, int seconds)
 	{
 		for (int i = 0; i < 10; i++)
 		{
 			try
 			{
-				System.out.println("         > " + exeFunc + " > " + operation + " == " + expectedValue + " ? ...");
+				logger.info(">> " + exeFunc + " >> " + operation + " == " + expectedValue + " ?");
 				Thread.sleep(seconds*1000);
 				m = session.getModule(APP_NAME);
 
 				if (("instances".equalsIgnoreCase(operation)) && (m.getRunningInstances() == expectedValue))
 				{
-					System.out.println("         > " + operation + " = " + expectedValue + " !!");
+					logger.info(">> " + operation + " = " + expectedValue);
 					return true;
 				}
 			}
@@ -98,13 +94,14 @@ public class CloudFoundryIT
 	
 	
     @Test
-    public void deploy() {
-    	System.out.println("### TEST > CloudFoundry > deploy()");
+    public void deploy() 
+    {
+    	logger.info("### TEST > CloudFoundry > deploy()");
 
         String path = this.getClass().getResource("/SampleApp1.war").getFile();
         eu.seaclouds.paas.Module m = session.deploy(APP_NAME, new DeployParameters(path));
         assertNotNull(m);
-        System.out.println("         > " + String.format("name='%s',  url='%s'", m.getName(), m.getUrl()));
+        logger.info(">> " + String.format("name='%s',  url='%s'", m.getName(), m.getUrl()));
         assertEquals(APP_NAME, m.getName());
         
         if (!checkResult(m, "deploying / starting application", "instances", 1, 10))
@@ -117,7 +114,7 @@ public class CloudFoundryIT
     @Test (dependsOnMethods={"deploy"})
     public void stop() 
     {
-    	System.out.println("### TEST > CloudFoundry > stop()");
+    	logger.info("### TEST > CloudFoundry > stop()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
         session.startStop(m, StartStopCommand.STOP);
@@ -130,8 +127,9 @@ public class CloudFoundryIT
     
     
     @Test (dependsOnMethods={"stop"})
-    public void start() {
-    	System.out.println("### TEST > CloudFoundry > start()");
+    public void start() 
+    {
+    	logger.info("### TEST > CloudFoundry > start()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
         session.startStop(m, StartStopCommand.START);
@@ -144,8 +142,9 @@ public class CloudFoundryIT
     
     
     @Test (dependsOnMethods={"start"})
-    public void scaleUp() {
-    	System.out.println("### TEST > CloudFoundry > scaleUp()");
+    public void scaleUp() 
+    {
+    	logger.info("### TEST > CloudFoundry > scaleUp()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
         session.scaleUpDown(m, ScaleUpDownCommand.SCALE_UP_INSTANCES);
@@ -158,8 +157,9 @@ public class CloudFoundryIT
     
     
     @Test (dependsOnMethods={"scaleUp"})
-    public void scaleDown() {
-    	System.out.println("### TEST > CloudFoundry > scaleDown()");
+    public void scaleDown() 
+    {
+    	logger.info("### TEST > CloudFoundry > scaleDown()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
         session.scaleUpDown(m, ScaleUpDownCommand.SCALE_DOWN_INSTANCES);
@@ -172,8 +172,9 @@ public class CloudFoundryIT
     
     
     @Test (dependsOnMethods={"scaleDown"})
-    public void bindToService() {
-    	System.out.println("### TEST > CloudFoundry > bindToService()");
+    public void bindToService() 
+    {
+    	logger.info("### TEST > CloudFoundry > bindToService()");
 
     	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
     	ServiceApp service = new ServiceApp("cleardb");
@@ -188,8 +189,9 @@ public class CloudFoundryIT
 
     
     @Test (dependsOnMethods={"bindToService"})
-    public void unbindFromService() {
-    	System.out.println("### TEST > CloudFoundry > unbindFromService()");
+    public void unbindFromService() 
+    {
+    	logger.info("### TEST > CloudFoundry > unbindFromService()");
 
     	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
     	ServiceApp service = new ServiceApp("cleardb");
@@ -204,14 +206,15 @@ public class CloudFoundryIT
     
     
     @Test (dependsOnMethods={"unbindFromService"})
-    public void undeploy() {
-    	System.out.println("### TEST > CloudFoundry > undeploy()");
+    public void undeploy() 
+    {
+    	logger.info("### TEST > CloudFoundry > undeploy()");
 
         session.undeploy(APP_NAME);
         
         try {
         	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
-        	System.out.println("### TEST > CloudFoundry > undeploy() > " + m.getName());
+        	logger.warn("### TEST > CloudFoundry > undeploy() FAILED: "+ m.getName());
         	fail(APP_NAME + " still exists");
         }
         catch (CloudFoundryException | PaasException ex)
@@ -220,4 +223,5 @@ public class CloudFoundryIT
         }
     }
 
+    
 }
