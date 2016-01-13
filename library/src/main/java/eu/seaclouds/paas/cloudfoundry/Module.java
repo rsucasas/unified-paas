@@ -3,6 +3,7 @@ package eu.seaclouds.paas.cloudfoundry;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
 
 
@@ -16,11 +17,19 @@ public class Module implements eu.seaclouds.paas.Module {
 	
 	private CloudApplication app;
 	private List<String> lServices;
+	private Map<String, Object> mEnv;
 	
 	
-	public Module(CloudApplication app) {
+	/**
+	 * 
+	 * Constructor
+	 * @param app
+	 * @param m
+	 */
+	public Module(CloudApplication app, Map<String, Object> m) {
         this.app = app;
         this.lServices = app.getServices();
+        this.mEnv = m;
     }
 	
 	
@@ -66,6 +75,12 @@ public class Module implements eu.seaclouds.paas.Module {
 		return lServices;
 	}
 	
+	
+	@Override
+	public Map<String, Object> getmEnv()
+	{
+		return mEnv;
+	}
 	
 
 }

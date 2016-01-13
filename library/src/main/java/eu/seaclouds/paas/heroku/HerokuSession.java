@@ -1,6 +1,7 @@
 package eu.seaclouds.paas.heroku;
 
 import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.heroku.api.Addon;
@@ -15,33 +16,36 @@ public class HerokuSession implements PaasSession {
 	
 	
     private static Logger logger = LoggerFactory.getLogger(HerokuSession.class);
-    
+    // paas connector
     private HerokuConnector connector;
     
     
+    /**
+     * 
+     * Constructor
+     * @param connector
+     */
     public HerokuSession(HerokuConnector connector) {
         this.connector = connector;
     }
     
 
     @Override
-    public List<Module> list() throws PaasException {
-        throw new UnsupportedOperationException("List method not implemented");
-    }
-    
-
-    @Override
     public Module deploy(String moduleName, PaasSession.DeployParameters params) throws PaasException {
         logger.info("DEPLOY({})", moduleName);
+        
         App app = connector.createJavaWebApp(moduleName);
         
-        Module module = new eu.seaclouds.paas.heroku.Module(app);
-        boolean deployed = connector.deployJavaWebApp(module.getName(), params.getPath());
+        if (app == null) {
+            throw new PaasException("Application not created");
+        }
+        
+        boolean deployed = connector.deployJavaWebApp(moduleName, params.getPath());
         
         if (!deployed) {
             throw new PaasException("Application not deployed");
         }
-        return module;
+        return getModule(moduleName);
     }
 
     
@@ -53,7 +57,8 @@ public class HerokuSession implements PaasSession {
 
     
     @Override
-    public void startStop(Module module, PaasSession.StartStopCommand command) throws PaasException {
+    public void startStop(Module module, PaasSession.StartStopCommand command) throws PaasException, UnsupportedOperationException
+    {
     	logger.info(command.name() + "({})", module.getName());
     	switch (command)
     	{
@@ -72,7 +77,7 @@ public class HerokuSession implements PaasSession {
 
 
 	@Override
-	public void scaleUpDown(Module module, ScaleUpDownCommand command) throws PaasException
+	public void scaleUpDown(Module module, ScaleUpDownCommand command) throws PaasException, UnsupportedOperationException
 	{
 		logger.info(command.name() + "({})", module.getName());
 		switch (command)
@@ -96,7 +101,7 @@ public class HerokuSession implements PaasSession {
 	
 	
 	@Override
-	public void scale(Module module, ScaleCommand command, int scale_value) throws PaasException
+	public void scale(Module module, ScaleCommand command, int scale_value) throws PaasException, UnsupportedOperationException
 	{
 		logger.info(command.name() + "({})", module.getName());
 		switch (command)
@@ -132,15 +137,18 @@ public class HerokuSession implements PaasSession {
 	@Override
 	public Module getModule(String moduleName) throws PaasException
 	{
-		logger.info("getModule({})", moduleName);
-		App app = connector.getHerokuAPIClient().getApp(moduleName);
+		logger.debug("getModule({})", moduleName);
 		
-		List<Addon> l = connector.getHerokuAPIClient().listAppAddons(moduleName);
+		App app = connector.getHerokuAPIClient().getApp(moduleName);
 		
 		if (app == null) {
 			throw new PaasException("Application " + moduleName + " is NULL");
 		}
-		return new eu.seaclouds.paas.heroku.Module(app, l);
+		
+		List<Addon> l = connector.getHerokuAPIClient().listAppAddons(moduleName);
+		Map<String, String> m = connector.getHerokuAPIClient().listConfig(moduleName);
+		
+		return new eu.seaclouds.paas.heroku.Module(app, l, m);
 	}
     
 

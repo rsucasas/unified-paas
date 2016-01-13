@@ -2,6 +2,7 @@ package eu.seaclouds.paas.heroku;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import com.heroku.api.Addon;
 import com.heroku.api.App;
 
@@ -16,6 +17,7 @@ public class Module implements eu.seaclouds.paas.Module {
 	
     private App app;
     private List<String> lServices;
+    private Map<String, Object> mEnv;
     
     
     /**
@@ -30,10 +32,12 @@ public class Module implements eu.seaclouds.paas.Module {
     
     /**
      * 
+     * Constructor
      * @param app
      * @param l
+     * @param m
      */
-    public Module(App app, List<Addon> l) {
+    public Module(App app, List<Addon> l, Map<String, String> m) {
         this.app = app;
         
         if ((l != null) && (l.size() > 0))
@@ -48,6 +52,9 @@ public class Module implements eu.seaclouds.paas.Module {
         {
         	lServices = new ArrayList<String>(0);
         }
+        
+        // Map<String, String> to Map<String, Object>
+        this.mEnv.putAll(m);
     }
 
     
@@ -81,6 +88,13 @@ public class Module implements eu.seaclouds.paas.Module {
 	{
 		return lServices;
 	}
-    
-    
+
+
+	@Override
+	public Map<String, Object> getmEnv()
+	{
+		return mEnv;
+	}
+	
+	
 }
