@@ -1,19 +1,20 @@
 package eu.seaclouds.paas;
 
-import java.util.List;
-
 
 public interface PaasSession {
     
+	
     public interface DeployParameters {
     	String getPath();
     	String getBuildpackUrl();
     }
 
+    
     public enum StartStopCommand {
         START,
         STOP
     }
+    
     
     public enum ScaleUpDownCommand {
         SCALE_UP_INSTANCES,
@@ -22,13 +23,13 @@ public interface PaasSession {
         SCALE_DOWN_MEMORY
     }
     
+    
     public enum ScaleCommand {
         SCALE_INSTANCES,
         SCALE_MEMORY,
         SCALE_DISK
     }
 
-    List<Module> list() throws PaasException;
     
     /**
      * 
@@ -39,6 +40,7 @@ public interface PaasSession {
      */
     Module deploy(String moduleName, PaasSession.DeployParameters params) throws PaasException;
     
+    
     /**
      * 
      * @param moduleName
@@ -46,13 +48,15 @@ public interface PaasSession {
      */
     void undeploy(String moduleName) throws PaasException;
     
+    
     /**
      * 
      * @param module
      * @param command
      * @throws PaasException
      */
-    void startStop(Module module, PaasSession.StartStopCommand command) throws PaasException;
+    void startStop(Module module, PaasSession.StartStopCommand command) throws PaasException, UnsupportedOperationException;
+    
     
     /**
      * scale instances / memory of applications
@@ -65,7 +69,8 @@ public interface PaasSession {
      * @param command
      * @throws PaasException
      */
-    void scaleUpDown(Module module, PaasSession.ScaleUpDownCommand command) throws PaasException;
+    void scaleUpDown(Module module, PaasSession.ScaleUpDownCommand command) throws PaasException, UnsupportedOperationException;
+    
     
     /**
      * scale instances / memory of applications
@@ -78,7 +83,8 @@ public interface PaasSession {
      * @param scale_value
      * @throws PaasException
      */
-    void scale(Module module, PaasSession.ScaleCommand command, int scale_value) throws PaasException;
+    void scale(Module module, PaasSession.ScaleCommand command, int scale_value) throws PaasException, UnsupportedOperationException;
+    
     
     /**
      * 

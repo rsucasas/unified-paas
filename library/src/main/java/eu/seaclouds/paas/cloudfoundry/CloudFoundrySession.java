@@ -1,6 +1,6 @@
 package eu.seaclouds.paas.cloudfoundry;
 
-import java.util.List;
+import java.util.Map;
 import org.cloudfoundry.client.lib.domain.CloudApplication;
 import org.cloudfoundry.client.lib.domain.CloudService;
 import org.slf4j.Logger;
@@ -20,30 +20,25 @@ public class CloudFoundrySession implements PaasSession {
 
 	
 	private static Logger logger = LoggerFactory.getLogger(CloudFoundrySession.class);
-	
+	// paas connector
 	private CloudFoundryConnector connector;
 	
 	
 	/**
 	 * 
+	 * Constructor
 	 * @param connector
 	 */
 	public CloudFoundrySession(CloudFoundryConnector connector) {
         this.connector = connector;
     }
-	
-	
-	@Override
-	public List<Module> list() throws PaasException
-	{
-		throw new UnsupportedOperationException("List method not implemented");
-	}
 
 	
 	@Override
 	public Module deploy(String moduleName, DeployParameters params) throws PaasException
 	{
 		logger.info("DEPLOY({})", moduleName);
+		
 		if (!connector.deployApp(moduleName, params.getPath(), params.getBuildpackUrl()))
 		{
 			throw new PaasException("Application not deployed");
@@ -62,7 +57,7 @@ public class CloudFoundrySession implements PaasSession {
 
 	
 	@Override
-	public void startStop(Module module, StartStopCommand command) throws PaasException
+	public void startStop(Module module, StartStopCommand command) throws PaasException, UnsupportedOperationException
 	{
 		logger.info(command.name() + "({})", module.getName());
 		switch (command)
@@ -82,7 +77,7 @@ public class CloudFoundrySession implements PaasSession {
 
 
 	@Override
-	public void scaleUpDown(Module module, ScaleUpDownCommand command) throws PaasException
+	public void scaleUpDown(Module module, ScaleUpDownCommand command) throws PaasException, UnsupportedOperationException
 	{
 		logger.info(command.name() + "({})", module.getName());
 		switch (command)
@@ -110,7 +105,7 @@ public class CloudFoundrySession implements PaasSession {
 	
 	
 	@Override
-	public void scale(Module module, ScaleCommand command, int scale_value) throws PaasException
+	public void scale(Module module, ScaleCommand command, int scale_value) throws PaasException, UnsupportedOperationException
 	{
 		logger.info(command.name() + "({})", module.getName());
 		switch (command)
@@ -166,13 +161,16 @@ public class CloudFoundrySession implements PaasSession {
 	public Module getModule(String moduleName) throws PaasException
 	{
 		logger.debug("getModule({})", moduleName);
+		
 		CloudApplication app = connector.getConnectedClient().getApplication(moduleName);
+		
 		if (app == null) {
-			logger.debug("getModule({}): app is NULL", moduleName);
 			throw new PaasException("Application " + moduleName + " is NULL");
 		}
-		logger.debug("getModule({}): return Module - app", moduleName);
-		return new eu.seaclouds.paas.cloudfoundry.Module(app);
+		
+		Map<String, Object> m = connector.getConnectedClient().getApplicationEnvironment(moduleName);
+		
+		return new eu.seaclouds.paas.cloudfoundry.Module(app, m);
 	}
 
 
