@@ -4,6 +4,7 @@ import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.fail;
+import java.util.Map;
 import org.cloudfoundry.client.lib.CloudFoundryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -185,6 +186,11 @@ public class CloudFoundryIT
         
         m = session.getModule(APP_NAME);
         assertEquals(1, m.getServices().size());
+        
+        logger.info("### TEST > CloudFoundry > bindToService() > environment values...");
+        for (Map.Entry<String, Object> entry : m.getmEnv().entrySet()) {
+            logger.info("### TEST > CloudFoundry > bindToService() > " + entry.getKey() + " / " + entry.getValue().toString());
+        }
     }
 
     

@@ -145,10 +145,18 @@ public class HerokuSession implements PaasSession {
 			throw new PaasException("Application " + moduleName + " is NULL");
 		}
 		
-		List<Addon> l = connector.getHerokuAPIClient().listAppAddons(moduleName);
-		Map<String, String> m = connector.getHerokuAPIClient().listConfig(moduleName);
-		
-		return new eu.seaclouds.paas.heroku.Module(app, l, m);
+		try
+		{
+			List<Addon> l = connector.getHerokuAPIClient().listAppAddons(moduleName);
+			Map<String, String> m = connector.getHerokuAPIClient().listConfig(moduleName);
+			
+			return new eu.seaclouds.paas.heroku.Module(app, l, m);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return new eu.seaclouds.paas.heroku.Module(app, null, null);
+		}
 	}
     
 

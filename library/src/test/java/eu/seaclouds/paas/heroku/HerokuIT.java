@@ -4,6 +4,7 @@ import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.fail;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeTest;
@@ -164,7 +165,7 @@ public class HerokuIT
     }
     
     
-    @Test (dependsOnMethods={"scaleUp"}) 
+    @Test (dependsOnMethods={"scaleDown"}) 
     public void bindToService() 
     {
     	logger.info("### TEST > Heroku > bindToService()");
@@ -175,6 +176,11 @@ public class HerokuIT
         
         m = session.getModule(APP_NAME);
         assertEquals(1, m.getServices().size());
+        
+        logger.info("### TEST > Heroku > bindToService() > environment values...");
+        for (Map.Entry<String, Object> entry : m.getmEnv().entrySet()) {
+            logger.info("### TEST > Heroku > bindToService() > " + entry.getKey() + " / " + entry.getValue().toString());
+        }
     }
 
     

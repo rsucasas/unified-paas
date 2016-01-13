@@ -1,6 +1,7 @@
 package eu.seaclouds.paas.heroku;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.heroku.api.Addon;
@@ -53,8 +54,15 @@ public class Module implements eu.seaclouds.paas.Module {
         	lServices = new ArrayList<String>(0);
         }
         
-        // Map<String, String> to Map<String, Object>
-        this.mEnv.putAll(m);
+        this.mEnv = new HashMap<String, Object>(3);
+        if ((m != null) && (m.size() > 0))
+        {
+	        // Map<String, String> to Map<String, Object>
+	        //this.mEnv.putAll(m);
+	        for (Map.Entry<String, String> entry : m.entrySet()) {
+	        	this.mEnv.put(entry.getKey(), entry.getValue());
+	        }
+        }
     }
 
     
