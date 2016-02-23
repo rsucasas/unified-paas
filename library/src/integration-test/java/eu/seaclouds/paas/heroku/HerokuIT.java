@@ -16,6 +16,7 @@ import eu.seaclouds.paas.PaasClientFactory;
 import eu.seaclouds.paas.PaasException;
 import eu.seaclouds.paas.PaasSession;
 import eu.seaclouds.paas.ServiceApp;
+import eu.seaclouds.paas.TestConfigProperties;
 import eu.seaclouds.paas.PaasSession.ScaleUpDownCommand;
 import eu.seaclouds.paas.PaasSession.StartStopCommand;
 
@@ -43,10 +44,11 @@ public class HerokuIT
 	@BeforeTest
     public void initialize()
     {
+		logger.info("### INTEGRATION TESTS > Heroku ...");
 		// login / connect to PaaS
         PaasClientFactory factory = new PaasClientFactory();
         PaasClient client = factory.getClient("heroku");
-        session = client.getSession(new Credentials.ApiKeyCredentials(System.getenv("heroku_apikey")));
+        session = client.getSession(new Credentials.ApiKeyCredentials(TestConfigProperties.getInstance().getHeroku_apiKey()));
     }
     
 

@@ -28,16 +28,16 @@ public class Tests
 		try
 		{
 			//
-			String heroku_apiKey = "";
-		    String heroku_username = "";
-		    String heroku_password = "";
+			String heroku_apiKey = "a9989a9d-48a1-49e3-974f-fd7f4a9e6f63";
+		    String heroku_username = "rsucasas@gmail.com";
+		    String heroku_password = "scss852.ATOS";
 		    
-		    String cf_username = "";
-		    String cf_password = "";
+		    String cf_username = "roi.sucasas@atos.net";
+		    String cf_password = "atos123";
 		    String cf_api = PIVOTAL;
-		    String cf_org = "";
+		    String cf_org = "ATOS-ModaClouds";
 		    String cf_space = "development";
-		    boolean cf_trustSelfSignedCerts = true;
+		    boolean cf_trustSelfSignedCerts = false;
 		    
 		    //
 		    PaasClientFactory factory = new PaasClientFactory();
