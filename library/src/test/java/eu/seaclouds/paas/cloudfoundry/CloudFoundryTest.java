@@ -12,6 +12,7 @@ import eu.seaclouds.paas.PaasClient;
 import eu.seaclouds.paas.PaasClientFactory;
 import eu.seaclouds.paas.PaasException;
 import eu.seaclouds.paas.PaasSession;
+import eu.seaclouds.paas.TestConfigProperties;
 import eu.seaclouds.paas.PaasSession.StartStopCommand;
 
 
@@ -30,10 +31,6 @@ public class CloudFoundryTest
 	// 		BLUEMIX = "https://api.eu-gb.bluemix.net"
 	// 		APPFOG = ""
 	// 		PRIVATE_CF = "https://api.95.211.172.243.xip.io"
-	private static final String API_URL = "https://api.run.pivotal.io";
-	private static final String ORG = "ATOS-ModaClouds";
-	private static final String SPACE = "development";
-	private static final boolean TRUST_SELF_SIGNED_CERTS = true;
 	
 	// Application
 	private static final String APP_NAME = "unified-paas-cloudfoundry-test";
@@ -41,18 +38,19 @@ public class CloudFoundryTest
 	// session
 	private PaasSession session;
     
-	/*
+
     @BeforeTest
     public void initialize()
     {
         // login / connect to PaaS
         PaasClient client = new PaasClientFactory().getClient("cloudfoundry");
-        session = client.getSession(new Credentials.ApiUserPasswordOrgSpaceCredentials(API_URL, 
-				   System.getenv("cf_user"), 
-				   System.getenv("cf_password"), 
-				   ORG, 
-				   SPACE, 
-				   TRUST_SELF_SIGNED_CERTS));
+        session = client.getSession(new Credentials.ApiUserPasswordOrgSpaceCredentials(
+				TestConfigProperties.getInstance().getCf_api(), 
+				TestConfigProperties.getInstance().getCf_user(),
+				TestConfigProperties.getInstance().getCf_password(), 
+				TestConfigProperties.getInstance().getCf_org(), 
+				TestConfigProperties.getInstance().getCf_space(), 
+				TestConfigProperties.getInstance().isCf_trustSelfSignedCerts()));
     }
     
     
@@ -147,6 +145,6 @@ public class CloudFoundryTest
         	assertTrue(true);
         }
     }
-     */
+
     
 }

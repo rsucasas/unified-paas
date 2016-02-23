@@ -7,10 +7,16 @@ import eu.seaclouds.paas.Credentials;
 import eu.seaclouds.paas.PaasClient;
 import eu.seaclouds.paas.PaasClientFactory;
 import eu.seaclouds.paas.PaasSession;
+import eu.seaclouds.paas.TestConfigProperties;
 import eu.seaclouds.paas.PaasSession.StartStopCommand;
-import eu.seaclouds.paas.ServiceApp;
 
 
+/**
+ * 
+ *
+ * @author ATOS
+ * @date 23/2/2016-16:11:39
+ */
 public class HerokuTest {
 	
 	
@@ -18,23 +24,14 @@ public class HerokuTest {
 
     private PaasSession session;
     
-    private String apiKey;
-    private String username;
-    private String password;
-    
-    /*
+
     @BeforeTest
     public void initialize()
     {
-        apiKey = System.getenv("heroku_apikey");
-        username = System.getenv("heroku_user");
-        password = System.getenv("heroku_password");
-        
         // login / connect to PaaS
         PaasClientFactory factory = new PaasClientFactory();
         PaasClient client = factory.getClient("heroku");
-        session = client.getSession(new Credentials.ApiKeyCredentials(apiKey));
-        //session = client.getSession(new Credentials.UserPasswordCredentials(username, password));
+        session = client.getSession(new Credentials.ApiKeyCredentials(TestConfigProperties.getInstance().getHeroku_apiKey()));
     }
     
     
@@ -52,18 +49,7 @@ public class HerokuTest {
     }
     
     
-    @Test
-    public void bindToService() {
-    	System.out.println("### TEST > HerokuTest > bindToService()");
-
-    	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
-    	ServiceApp service = new ServiceApp("cleardb:ignite");
-    	
-        session.bindToService(m, service);
-    }
-    
-    
-    @Test
+    @Test (dependsOnMethods={"deploy"})
     public void stop() {
     	System.out.println("### TEST > HerokuTest > stop()");
     	
@@ -77,7 +63,7 @@ public class HerokuTest {
     }
     
     
-    @Test
+    @Test (dependsOnMethods={"stop"})
     public void start() {
     	System.out.println("### TEST > HerokuTest > start()");
 
@@ -89,14 +75,25 @@ public class HerokuTest {
         System.out.println("### >> running instances: " + m.getRunningInstances());
         assertEquals(1, m.getRunningInstances());
     }
-   
-
-    @Test
+    
+    
+    @Test (dependsOnMethods={"start"})
     public void undeploy() {
     	System.out.println("### TEST > HerokuTest > undeploy()");
 
         session.undeploy(APP_NAME);
     }
- */
+    
+    
+    /*@Test
+    public void bindToService() {
+    	System.out.println("### TEST > HerokuTest > bindToService()");
+
+    	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
+    	ServiceApp service = new ServiceApp("cleardb:ignite");
+    	
+        session.bindToService(m, service);
+    }*/
+
     
 }
