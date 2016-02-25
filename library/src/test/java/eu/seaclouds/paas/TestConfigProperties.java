@@ -23,6 +23,8 @@ public class TestConfigProperties
 	private static TestConfigProperties _instance;
 		
 	// properties:
+	// APP NAME
+	private String app_name = "";
 	// HEROKU
 	private String heroku_apiKey = "";
 	private String heroku_user = "";
@@ -48,6 +50,8 @@ public class TestConfigProperties
 			if ((props == null) || (props.isEmpty())) {
 				logger.error("PropertiesConfiguration file not found: tests.config.properties");
 			}
+			
+			app_name = props.getString("app_name", "");
 			
 			heroku_apiKey = props.getString("heroku_apikey", "");
 			heroku_user = props.getString("heroku_user", "");
@@ -79,6 +83,15 @@ public class TestConfigProperties
 	}
 	
 	
+	/**
+	 * @return the app_name
+	 */
+	public String getApp_name()
+	{
+		return app_name;
+	}
+
+
 	/**
 	 * @return the heroku_apiKey
 	 */

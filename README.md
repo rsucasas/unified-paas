@@ -17,17 +17,19 @@ SeaClouds Unified PaaS Library
 
 `curl http://localhost:8080/heroku/applications -X POST -F file=@"<warfile>" -F model='{"name":"samplewar"}' -H"Content-Type: multipart/form-data" -H"apikey:<heroku-api-key>"`
 
-### Unit and integration tests ###
+### Unit and integration tests / Install ###
 
 ##### Configuration #####
 * Set values in /library/src/test/resources/tests.config.properties
 
 ##### Unit tests #####
-* Execute: `mvn clean test -P dev`
+* Execute tests: `mvn clean test -P dev`
+* Install: `mvn clean install -P dev`
 
 ##### Integration tests #####
-* Execute: `mvn clean verify -P integration-test`
+* Execute tests: `mvn clean verify -P integration-test`
+* Install: `mvn clean install -P integration-test`
 
 ##### Skip tests #####
-* Execute: `mvn install -Dmaven.test.skip=true`
+* Install: `mvn clean install`
 

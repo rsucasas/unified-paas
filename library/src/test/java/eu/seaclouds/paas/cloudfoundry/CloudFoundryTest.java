@@ -5,6 +5,8 @@ import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.fail;
 import org.cloudfoundry.client.lib.CloudFoundryException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import eu.seaclouds.paas.Credentials;
@@ -26,22 +28,18 @@ public class CloudFoundryTest
 {
 
 	
-	// Cloud Foundry PaaS providers 
-	// 		PIVOTAL = "https://api.run.pivotal.io"
-	// 		BLUEMIX = "https://api.eu-gb.bluemix.net"
-	// 		APPFOG = ""
-	// 		PRIVATE_CF = "https://api.95.211.172.243.xip.io"
-	
 	// Application
-	private static final String APP_NAME = "unified-paas-cloudfoundry-test";
-	
+	private static final String APP_NAME = TestConfigProperties.getInstance().getApp_name();
 	// session
 	private PaasSession session;
+	// log
+	private static Logger logger = LoggerFactory.getLogger(CloudFoundryTest.class);
     
 
     @BeforeTest
     public void initialize()
     {
+    	logger.info("### UNIT TESTS > CloudFoundry ...");
         // login / connect to PaaS
         PaasClient client = new PaasClientFactory().getClient("cloudfoundry");
         session = client.getSession(new Credentials.ApiUserPasswordOrgSpaceCredentials(
@@ -60,13 +58,13 @@ public class CloudFoundryTest
 		{
 			try
 			{
-				System.out.println("         > " + exeFunc + " > " + operation + " == " + expectedValue + " ? ...");
+				logger.info("         > " + exeFunc + " > " + operation + " == " + expectedValue + " ? ...");
 				Thread.sleep(seconds*1000);
 				m = session.getModule(APP_NAME);
 
 				if (("instances".equalsIgnoreCase(operation)) && (m.getRunningInstances() == expectedValue))
 				{
-					System.out.println("         > " + operation + " = " + expectedValue + " !!");
+					logger.info("         > " + operation + " = " + expectedValue + " !!");
 					return true;
 				}
 			}
@@ -83,7 +81,7 @@ public class CloudFoundryTest
 
     @Test
     public void deploy() {
-    	System.out.println("### TEST > CloudFoundry > deploy()");
+    	logger.info("### TEST > CloudFoundry > deploy()");
 
         String path = this.getClass().getResource("/SampleApp1.war").getFile();
         eu.seaclouds.paas.Module m = session.deploy(APP_NAME, new DeployParameters(path));
@@ -101,7 +99,7 @@ public class CloudFoundryTest
   
     @Test (dependsOnMethods={"deploy"})
     public void stop() {
-    	System.out.println("### TEST > CloudFoundry > stop()");
+    	logger.info("### TEST > CloudFoundry > stop()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
 
@@ -116,7 +114,7 @@ public class CloudFoundryTest
     
     @Test (dependsOnMethods={"stop"})
     public void start() {
-    	System.out.println("### TEST > CloudFoundry > start()");
+    	logger.info("### TEST > CloudFoundry > start()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
 
@@ -131,13 +129,13 @@ public class CloudFoundryTest
     
     @Test (dependsOnMethods={"start"})
     public void undeploy() {
-    	System.out.println("### TEST > CloudFoundry > undeploy()");
+    	logger.info("### TEST > CloudFoundry > undeploy()");
 
         session.undeploy(APP_NAME);
         
         try {
         	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
-        	System.out.println("### TEST > CloudFoundry > undeploy() > " + m.getName());
+        	logger.warn("### TEST > CloudFoundry > undeploy() > " + m.getName());
         	fail(APP_NAME + " still exists");
         }
         catch (CloudFoundryException | PaasException ex)

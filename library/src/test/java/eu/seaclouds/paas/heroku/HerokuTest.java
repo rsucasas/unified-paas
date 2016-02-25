@@ -1,5 +1,7 @@
 package eu.seaclouds.paas.heroku;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import static org.testng.AssertJUnit.*;
@@ -17,17 +19,22 @@ import eu.seaclouds.paas.PaasSession.StartStopCommand;
  * @author ATOS
  * @date 23/2/2016-16:11:39
  */
-public class HerokuTest {
+public class HerokuTest 
+{
 	
 	
-    private static final String APP_NAME = "unified-paas-heroku-test";
-
+	// Application
+    private static final String APP_NAME = TestConfigProperties.getInstance().getApp_name();
+    // session
     private PaasSession session;
+    // log
+ 	private static Logger logger = LoggerFactory.getLogger(HerokuTest.class);
     
 
     @BeforeTest
     public void initialize()
     {
+    	logger.info("### UNIT TESTS > Heroku ...");
         // login / connect to PaaS
         PaasClientFactory factory = new PaasClientFactory();
         PaasClient client = factory.getClient("heroku");
@@ -37,7 +44,7 @@ public class HerokuTest {
     
     @Test
     public void deploy() {
-        System.out.println("### TEST > HerokuTest > deploy()");
+    	logger.info("### TEST > HerokuTest > deploy()");
 
         String path = this.getClass().getResource("/SampleApp1.war").getFile();
         eu.seaclouds.paas.Module m = session.deploy(APP_NAME, new DeployParameters(path));
@@ -51,7 +58,7 @@ public class HerokuTest {
     
     @Test (dependsOnMethods={"deploy"})
     public void stop() {
-    	System.out.println("### TEST > HerokuTest > stop()");
+    	logger.info("### TEST > HerokuTest > stop()");
     	
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
 
@@ -65,7 +72,7 @@ public class HerokuTest {
     
     @Test (dependsOnMethods={"stop"})
     public void start() {
-    	System.out.println("### TEST > HerokuTest > start()");
+    	logger.info("### TEST > HerokuTest > start()");
 
         eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
 
@@ -79,21 +86,23 @@ public class HerokuTest {
     
     @Test (dependsOnMethods={"start"})
     public void undeploy() {
-    	System.out.println("### TEST > HerokuTest > undeploy()");
+    	logger.info("### TEST > HerokuTest > undeploy()");
 
         session.undeploy(APP_NAME);
     }
     
     
-    /*@Test
+    /*
+    @Test
     public void bindToService() {
-    	System.out.println("### TEST > HerokuTest > bindToService()");
+    	logger.info("### TEST > HerokuTest > bindToService()");
 
     	eu.seaclouds.paas.Module m = session.getModule(APP_NAME);
     	ServiceApp service = new ServiceApp("cleardb:ignite");
     	
         session.bindToService(m, service);
-    }*/
+    }
+    */
 
     
 }
