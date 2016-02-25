@@ -32,7 +32,7 @@ public class CloudFoundryIT
 	
 	
 	// Application
-	private static final String APP_NAME = "unified-paas-cloudfoundry-test2";
+	private static final String APP_NAME = TestConfigProperties.getInstance().getApp_name();
 	private static final String SERV_NAME = "mycleardb2";
 	
 	// session

@@ -32,7 +32,7 @@ public class HerokuIT
 	
 	
 	// Application
-	private static final String APP_NAME = "unified-paas-heroku-test";
+	private static final String APP_NAME = TestConfigProperties.getInstance().getApp_name();
 
 	// session
     private PaasSession session;
