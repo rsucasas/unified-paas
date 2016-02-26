@@ -44,6 +44,7 @@
         <jersey.version>2.17</jersey.version>
         <cf-version>1.1.3</cf-version>
         <heroku-deploy>0.5.7</heroku-deploy>
+        <commons-configuration.version>1.10</commons-configuration.version>
         
         <!-- Test and logs dependencies -->
         <testng.version>6.8.8</testng.version>
@@ -183,6 +184,12 @@
 	            <version>${jersey.version}</version>
 	        </dependency>
 	        
+            <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>${commons-configuration.version}</version>
+            </dependency>
+
             <!-- Dropwizard -->
             <dependency>
                 <groupId>io.dropwizard</groupId>
