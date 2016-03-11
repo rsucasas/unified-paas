@@ -4,6 +4,8 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.openshift.client.ConnectionBuilder;
+import com.openshift.client.IApplication;
+import com.openshift.client.IDomain;
 import com.openshift.client.IOpenShiftConnection;
 import com.openshift.client.OpenShiftException;
 
@@ -46,6 +48,30 @@ public class Openshift2Connector
 		{
 			logger.error(">> Not connected to Openshift2: " + e.getMessage());
 			throw new RuntimeException("Not connected to Openshift2: " + e.getMessage(), e);
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param applicationName
+	 */
+	public void deleteApp(String applicationName) 
+	{
+		logger.info(">> Deleting application '" + applicationName + "' ...");
+		
+		if (_of2client != null)
+		{
+			for (IDomain d : _of2client.getDomains())
+			{
+				IApplication app = d.getApplicationByName(applicationName);
+				if (app != null)
+				{
+					app.destroy();
+					logger.info(">> Application '" + applicationName + "' deleted");
+					break;
+				}
+			}
 		}
 	}
 		

@@ -36,7 +36,8 @@ public class Openshift2Session implements PaasSession
 	@Override
 	public Module deploy(String moduleName, DeployParameters params) throws PaasException
 	{
-		// TODO Auto-generated method stub
+		logger.info("DEPLOY({})", moduleName);
+		
 		return null;
 	}
 
@@ -44,32 +45,78 @@ public class Openshift2Session implements PaasSession
 	@Override
 	public void undeploy(String moduleName) throws PaasException
 	{
-		// TODO Auto-generated method stub
-		
+		logger.info("UNDEPLOY({})", moduleName);
+        connector.deleteApp(moduleName);
 	}
 	
 
 	@Override
 	public void startStop(Module module, StartStopCommand command) throws PaasException, UnsupportedOperationException
 	{
-		// TODO Auto-generated method stub
-		
+		logger.info(command.name() + "({})", module.getName());
+		switch (command)
+    	{
+    		case START:
+
+    			break;
+    			
+    		case STOP:
+
+    			break;
+    			
+    		default:
+    			throw new UnsupportedOperationException(command.name() + " command not supported (Cloud Foundry)");
+    	}
 	}
 
 	
 	@Override
 	public void scaleUpDown(Module module, ScaleUpDownCommand command) throws PaasException, UnsupportedOperationException
 	{
-		// TODO Auto-generated method stub
-		
+		logger.info(command.name() + "({})", module.getName());
+		switch (command)
+    	{
+    		case SCALE_UP_INSTANCES:
+
+    			break;
+    			
+    		case SCALE_DOWN_INSTANCES:
+
+    			break;
+    			
+    		case SCALE_UP_MEMORY:
+    			break;
+    			
+    		case SCALE_DOWN_MEMORY:
+    			break;
+    			
+    		default:
+    			throw new UnsupportedOperationException(command.name() + " command not supported (Cloud Foundry)");
+    	}
 	}
 	
 
 	@Override
 	public void scale(Module module, ScaleCommand command, int scale_value) throws PaasException, UnsupportedOperationException
 	{
-		// TODO Auto-generated method stub
-		
+		logger.info(command.name() + "({})", module.getName());
+		switch (command)
+    	{
+    		case SCALE_INSTANCES:
+
+    			break;
+    			
+    		case SCALE_MEMORY:
+
+    			break;
+    			
+    		case SCALE_DISK:
+
+    			break;
+    			
+    		default:
+    			throw new UnsupportedOperationException(command.name() + " command not supported (Heroku)");
+    	}
 	}
 
 	
@@ -92,7 +139,8 @@ public class Openshift2Session implements PaasSession
 	@Override
 	public Module getModule(String moduleName) throws PaasException
 	{
-		// TODO Auto-generated method stub
+		logger.debug("getModule({})", moduleName);
+		
 		return null;
 	}
 	
