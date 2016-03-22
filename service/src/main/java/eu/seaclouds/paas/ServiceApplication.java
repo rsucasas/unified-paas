@@ -4,6 +4,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import eu.seaclouds.paas.resources.BluemixResource;
 import eu.seaclouds.paas.resources.CloudfoundryResource;
 import eu.seaclouds.paas.resources.HerokuResource;
+import eu.seaclouds.paas.resources.Openshift2Resource;
 import eu.seaclouds.paas.resources.PivotalResource;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
@@ -44,12 +45,14 @@ public class ServiceApplication extends Application<ServiceConfiguration>
 		final CloudfoundryResource cloudfoundry = new CloudfoundryResource(paasClientFactory.getClient("cloudfoundry"));
 		final PivotalResource pivotal = new PivotalResource(paasClientFactory.getClient("pivotal"));
 		final BluemixResource bluemix = new BluemixResource(paasClientFactory.getClient("bluemix"));
+		final Openshift2Resource openshift2 = new Openshift2Resource(paasClientFactory.getClient("openshift2"));
 
 		environment.jersey().register(MultiPartFeature.class);
 		environment.jersey().register(heroku);
 		environment.jersey().register(cloudfoundry);
 		environment.jersey().register(pivotal);
 		environment.jersey().register(bluemix);
+		environment.jersey().register(openshift2);
 	}
 	
 

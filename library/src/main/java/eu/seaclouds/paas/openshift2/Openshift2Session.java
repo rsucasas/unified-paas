@@ -2,6 +2,7 @@ package eu.seaclouds.paas.openshift2;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.openshift.client.IApplication;
 import eu.seaclouds.paas.Module;
 import eu.seaclouds.paas.PaasException;
 import eu.seaclouds.paas.PaasSession;
@@ -31,14 +32,23 @@ public class Openshift2Session implements PaasSession
     public Openshift2Session(Openshift2Connector connector) {
         this.connector = connector;
     }
+    
+ 
+	/**
+	 * @return the connector
+	 */
+	public Openshift2Connector getConnector()
+	{
+		return connector;
+	}
 
-	
+
 	@Override
 	public Module deploy(String moduleName, DeployParameters params) throws PaasException
 	{
 		logger.info("DEPLOY({})", moduleName);
-		
-		return null;
+		IApplication app = connector.deployAppFromGit(moduleName, params.getPath(), params.getCartridge());
+		return getModule(moduleName, app);
 	}
 
 	
@@ -57,11 +67,11 @@ public class Openshift2Session implements PaasSession
 		switch (command)
     	{
     		case START:
-
+    			connector.startApp(module.getName());
     			break;
     			
     		case STOP:
-
+    			connector.stopApp(module.getName());
     			break;
     			
     		default:
@@ -77,19 +87,15 @@ public class Openshift2Session implements PaasSession
 		switch (command)
     	{
     		case SCALE_UP_INSTANCES:
-
+    			connector.scaleUp(module.getName());
     			break;
     			
     		case SCALE_DOWN_INSTANCES:
-
+    			connector.scaleDown(module.getName());
     			break;
     			
     		case SCALE_UP_MEMORY:
-    			break;
-    			
     		case SCALE_DOWN_MEMORY:
-    			break;
-    			
     		default:
     			throw new UnsupportedOperationException(command.name() + " command not supported (Cloud Foundry)");
     	}
@@ -107,13 +113,7 @@ public class Openshift2Session implements PaasSession
     			break;
     			
     		case SCALE_MEMORY:
-
-    			break;
-    			
     		case SCALE_DISK:
-
-    			break;
-    			
     		default:
     			throw new UnsupportedOperationException(command.name() + " command not supported (Heroku)");
     	}
@@ -123,16 +123,14 @@ public class Openshift2Session implements PaasSession
 	@Override
 	public void bindToService(Module module, ServiceApp service) throws PaasException
 	{
-		// TODO Auto-generated method stub
-		
+		connector.bindToService(module.getName(), service.getServiceName());
 	}
 
 	
 	@Override
 	public void unbindFromService(Module module, ServiceApp service) throws PaasException
 	{
-		// TODO Auto-generated method stub
-		
+		connector.unbindFromService(module.getName(), service.getServiceName());
 	}
 
 	
@@ -141,7 +139,32 @@ public class Openshift2Session implements PaasSession
 	{
 		logger.debug("getModule({})", moduleName);
 		
-		return null;
+		IApplication app = connector.getAppFromDomains(moduleName);
+		
+		if (app == null) {
+			throw new PaasException("Application " + moduleName + " is NULL");
+		}
+
+		return new eu.seaclouds.paas.openshift2.Module(app);
+	}
+	
+	
+	/**
+	 * 
+	 * @param moduleName
+	 * @param app
+	 * @return
+	 * @throws PaasException
+	 */
+	private Module getModule(String moduleName, IApplication app) throws PaasException
+	{
+		logger.debug("getModule({})", moduleName);
+		
+		if (app == null) {
+			throw new PaasException("Application " + moduleName + " is NULL");
+		}
+
+		return new eu.seaclouds.paas.openshift2.Module(app);
 	}
 	
 

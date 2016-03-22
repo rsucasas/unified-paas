@@ -2,7 +2,6 @@
 SeaClouds Unified PaaS Library
 
 ## Usage ##
-
 1. Compile needed projects
 
 * https://github.com/rosogon/heroku-java-client. Compile with `mvn install –Dmaven.test.skip`. 
@@ -20,6 +19,19 @@ SeaClouds Unified PaaS Library
 ##### Configuration #####
 * Set values in /library/src/test/resources/tests.config.properties
 
-##### Integration tests #####
+##### Integration Tests #####
 * Execute tests: `mvn clean verify -P integration-test`
+
+## Java Client Libraries ##
+* Cloud Foundry:
+https://github.com/cloudfoundry/cf-java-client
+
+* Heroku:
+https://github.com/heroku/heroku.jar
+
+* Openshift v2 (used by Openshift Online):
+https://github.com/openshift/openshift-java-client 
+
+* Openshift v3 (new version for the version 3 architecture of OpenShift based on Kubernetes: OpenShift Enterprise, local Openshift installations ...):
+https://github.com/openshift/openshift-restclient-java
 

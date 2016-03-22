@@ -19,8 +19,7 @@ public class Openshift3Client implements PaasClient
 	@Override
 	public PaasSession getSession(Credentials credentials) throws PaasException
 	{
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Openshift3 client not implemented");
 	}
 
 	

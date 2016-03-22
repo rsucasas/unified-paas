@@ -7,6 +7,7 @@ public interface PaasSession {
     public interface DeployParameters {
     	String getPath();
     	String getBuildpackUrl();
+    	String getCartridge();
     }
 
     
