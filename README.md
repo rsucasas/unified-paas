@@ -32,11 +32,11 @@ Java client libraries used in the project:
   <dt>Features</dt>
 </dl>
 
-| Feature        | Supported?           | Comments  |
-| ------------- |:-------------:| :-----|
-| Deployment      | YES  | .. |
-| Scaling      | YES       |   .. |
-| Services |   YES     |    .. |
+| Feature       | Supported?    | Comments  |
+| ------------- |:-------------:|:-----|
+| Application deployment from GIT      | -  | - |
+| Scaling capabilities     | -       |   - |
+| Services management |   -     |   - |
 
 + [Heroku](https://github.com/heroku/heroku.jar)
 <dl>
@@ -45,11 +45,11 @@ Java client libraries used in the project:
   <dt>Features</dt>
 </dl>
 
-| Feature        | Supported?           | Comments  |
-| ------------- |:-------------:| :-----|
-| Deployment      | YES  | .. |
-| Scaling      | YES       |   .. |
-| Services |   YES     |    .. |
+| Feature       | Supported?    | Comments  |
+| ------------- |:-------------:|:-----|
+| Application deployment from GIT      | -  | - |
+| Scaling capabilities     | -       |   - |
+| Services management |   -     |   - |
 
 + [Openshift v2](https://github.com/openshift/openshift-java-client) (used by Openshift Online)
 <dl>
@@ -58,11 +58,11 @@ Java client libraries used in the project:
   <dt>Features</dt>
 </dl>
 
-| Feature        | Supported?           | Comments  |
-| ------------- |:-------------:| :-----|
-| Deployment      | YES  | .. |
-| Scaling      | YES       |   .. |
-| Services |   YES     |    .. |
+| Feature       | Supported?    | Comments  |
+| ------------- |:-------------:|:-----|
+| Application deployment from GIT      | -  | - |
+| Scaling capabilities     | -       |   - |
+| Services management |   -     |   - |
 
 + [Openshift v3](https://github.com/openshift/openshift-restclient-java)  (new version for the version 3 architecture of OpenShift based on Kubernetes: OpenShift Enterprise, local Openshift installations ...)
 <dl>
