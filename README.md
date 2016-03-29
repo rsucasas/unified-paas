@@ -47,8 +47,8 @@ Java client libraries used in the project:
 + **Heroku**:  [Heroku JAR](https://github.com/heroku/heroku.jar) & [heroku-maven-plugin](https://github.com/heroku/heroku-maven-plugin)
 <dl>
   <dt>Description</dt>
-  <dd>Heroku JAR: The Heroku JAR is a java artifact that provides a simple wrapper for the Heroku REST API. The Heroku REST API allows Heroku users to manage their accounts, applications, addons, and other aspects related to Heroku.</dd>
-  <dd>heroku-maven-plugin: This plugin is used to deploy Java applications directly to Heroku without pushing to a Git repository. This is can be useful when deploying from a CI server, deploying pre-built Jar or War files.</dd>
+  <dd>[Heroku JAR](https://github.com/heroku/heroku.jar): The Heroku JAR is a java artifact that provides a simple wrapper for the Heroku REST API. The Heroku REST API allows Heroku users to manage their accounts, applications, addons, and other aspects related to Heroku.</dd>
+  <dd>[heroku-maven-plugin](https://github.com/heroku/heroku-maven-plugin): This plugin is used to deploy Java applications directly to Heroku without pushing to a Git repository. This is can be useful when deploying from a CI server, deploying pre-built Jar or War files.</dd>
   <dt>Features</dt>
 </dl>
 
@@ -95,9 +95,9 @@ Java client libraries used in the project:
 
 ---
 
-| Client        | Version           | URL  |
-| ------------- |:-------------:| :-----|
-| Cloud Foundry      | 1.1.3  | https://github.com/cloudfoundry/cf-java-client |
-| Heroku      | 0.16 / 0.5.7 *       |   https://github.com/heroku/heroku.jar |
-| Openshift v2 |   2.7.0.Final     |    https://github.com/openshift/openshift-java-client |
-| Openshift v3 |   -     |    https://github.com/openshift/openshift-restclient-java |
+| Client        | Version used  | Last version (at 2016.03.29) | License | Comments  |
+| ------------- |:-------------:| :---------------------------:| :-----|
+| Cloud Foundry | 1.1.3         | 1.1.3 (Jun, 2015)|  |https://github.com/cloudfoundry/cf-java-client |
+| Heroku        | 0.16 / 0.5.7 *| | | https://github.com/heroku/heroku.jar |
+| Openshift v2  | 2.7.0.Final   | | | https://github.com/openshift/openshift-java-client |
+| Openshift v3  | -             | | | https://github.com/openshift/openshift-restclient-java |
