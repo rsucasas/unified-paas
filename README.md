@@ -26,9 +26,14 @@ SeaClouds Unified PaaS Library
 Java client libraries used in the project:
 
 + [Cloud Foundry](https://github.com/cloudfoundry/cf-java-client)
+<dl>
+  <dt>Definition list</dt>
+<dd>
 ```
 
 ```
+</dd>
+</dl>
 + [Heroku](https://github.com/heroku/heroku.jar)
 ```
 
