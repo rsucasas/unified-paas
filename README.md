@@ -27,24 +27,24 @@ Java client libraries used in the project:
 
 + [Cloud Foundry](https://github.com/cloudfoundry/cf-java-client)
 ```
-https://github.com/cloudfoundry/cf-java-client
+
 ```
 + [Heroku](https://github.com/heroku/heroku.jar)
 ```
-https://github.com/heroku/heroku.jar
+
 ```
 + [Openshift v2](https://github.com/openshift/openshift-java-client) (used by Openshift Online)
 ```
-https://github.com/openshift/openshift-java-client 
+
 ```
 + [Openshift v3](https://github.com/openshift/openshift-restclient-java)  (new version for the version 3 architecture of OpenShift based on Kubernetes: OpenShift Enterprise, local Openshift installations ...)
 ```
-https://github.com/openshift/openshift-restclient-java
+
 ```
 
-| Client        | Description           | URL  |
-| ------------- |:-------------:| -----:|
-| Cloud Foundry      |   | https://github.com/cloudfoundry/cf-java-client |
-| Heroku      |        |   https://github.com/heroku/heroku.jar |
-| Openshift v2 |        |    https://github.com/openshift/openshift-java-client |
+| Client        | Version           | URL  |
+| ------------- |:-------------:| :-----|
+| Cloud Foundry      | 1.1.3  | https://github.com/cloudfoundry/cf-java-client |
+| Heroku      | 0.16 / 0.5.7 *       |   https://github.com/heroku/heroku.jar |
+| Openshift v2 |   2.7.0.Final     |    https://github.com/openshift/openshift-java-client |
 | Openshift v3 |        |    https://github.com/openshift/openshift-restclient-java |
