@@ -25,7 +25,7 @@ SeaClouds Unified PaaS Library
 ## Java Client Libraries
 Java client libraries used in the project:
 
-+ **Cloud Foundry** [Cloud Foundry Java Client](https://github.com/cloudfoundry/cf-java-client)
++ **Cloud Foundry**:  [Cloud Foundry Java Client](https://github.com/cloudfoundry/cf-java-client)
 <dl>
   <dt>Description</dt>
   <dd></dd>
@@ -44,7 +44,7 @@ Java client libraries used in the project:
 | ------------- ||
 | - |
 ---
-+ **Heroku** [Heroku JAR](https://github.com/heroku/heroku.jar) & [heroku-maven-plugin](https://github.com/heroku/heroku-maven-plugin)
++ **Heroku**:  [Heroku JAR](https://github.com/heroku/heroku.jar) & [heroku-maven-plugin](https://github.com/heroku/heroku-maven-plugin)
 <dl>
   <dt>Description</dt>
   <dd></dd>
@@ -64,7 +64,7 @@ Java client libraries used in the project:
 | - |
 ---
 
-+ **OpenShift v2** [OpenShift Java Client](https://github.com/openshift/openshift-java-client) (used by Openshift Online / only for Version 2)
++ **OpenShift v2**:  [OpenShift Java Client](https://github.com/openshift/openshift-java-client) (used by Openshift Online / only for Version 2)
 <dl>
   <dt>Description</dt>
   <dd></dd>
