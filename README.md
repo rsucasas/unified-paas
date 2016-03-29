@@ -34,9 +34,16 @@ Java client libraries used in the project:
 
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
-| Application deployment from GIT      | -  | - |
-| Scaling capabilities     | -       |   - |
-| Services management |   -     |   - |
+| Application deployment      | YES  | Tested with **Java** and **PHP** apps |
+| Start / Stop / Remove |   YES     |   - |
+| Scaling capabilities     | YES       |  Can scale number of instances, disk and RAM |
+| Services management |   YES     |   Tested with **ClearDB** from Pivotal |
+| Environment variables management |   YES     |   Read & Write |
+
+<dl>
+  <dt>Limitations</dt>
+  <dd></dd>
+</dl>
 
 + [Heroku](https://github.com/heroku/heroku.jar)
 <dl>
@@ -47,9 +54,11 @@ Java client libraries used in the project:
 
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
-| Application deployment from GIT      | -  | - |
+| Application deployment      | -  | - |
+| Start / Stop / Remove |   -     |   - |
 | Scaling capabilities     | -       |   - |
 | Services management |   -     |   - |
+| Environment variables management |   -     |   - |
 
 + [Openshift v2](https://github.com/openshift/openshift-java-client) (used by Openshift Online)
 <dl>
@@ -60,9 +69,11 @@ Java client libraries used in the project:
 
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
-| Application deployment from GIT      | -  | - |
+| Application deployment      | -  | - |
+| Start / Stop / Remove |   -     |   - |
 | Scaling capabilities     | -       |   - |
 | Services management |   -     |   - |
+| Environment variables management |   -     |   - |
 
 + [Openshift v3](https://github.com/openshift/openshift-restclient-java)  (new version for the version 3 architecture of OpenShift based on Kubernetes: OpenShift Enterprise, local Openshift installations ...)
 <dl>
