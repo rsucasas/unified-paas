@@ -40,11 +40,10 @@ Java client libraries used in the project:
 | Services management |   YES     |   Tested with **ClearDB** from Pivotal |
 | Environment variables management |   YES     |   Read & Write |
 
-<dl>
-  <dt>Limitations</dt>
-  <dd></dd>
-</dl>
-
+| Limitations  |
+| ------------- ||
+| - |
+---
 + [Heroku](https://github.com/heroku/heroku.jar)
 <dl>
   <dt>Description</dt>
