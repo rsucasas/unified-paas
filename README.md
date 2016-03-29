@@ -53,11 +53,16 @@ Java client libraries used in the project:
 
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
-| Application deployment      | -  | - |
-| Start / Stop / Remove |   -     |   - |
-| Scaling capabilities     | -       |   - |
-| Services management |   -     |   - |
-| Environment variables management |   -     |   - |
+| Application deployment      | YES  | Tested with **Java** |
+| Start / Stop / Remove |   YES     |   - |
+| Scaling capabilities     | YES       |  Can scale number of instances |
+| Services management |   YES     |   Tested with **ClearDB** from Pivotal |
+| Environment variables management |   YES     |   Read & Write |
+
+| Limitations  |
+| ------------- ||
+| - |
+---
 
 + [Openshift v2](https://github.com/openshift/openshift-java-client) (used by Openshift Online)
 <dl>
@@ -68,11 +73,16 @@ Java client libraries used in the project:
 
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
-| Application deployment      | -  | - |
-| Start / Stop / Remove |   -     |   - |
-| Scaling capabilities     | -       |   - |
-| Services management |   -     |   - |
-| Environment variables management |   -     |   - |
+| Application deployment      | YES  | Only from GIT |
+| Start / Stop / Remove |   YES     |   - |
+| Scaling capabilities     | YES       |  Can scale number of instances |
+| Services management |   YES     |   Tested with **MySQL** from [Openshift Online](https://openshift.redhat.com) |
+| Environment variables management |   -     |  -  |
+
+| Limitations  |
+| ------------- ||
+| - |
+---
 
 + [Openshift v3](https://github.com/openshift/openshift-restclient-java)  (new version for the version 3 architecture of OpenShift based on Kubernetes: OpenShift Enterprise, local Openshift installations ...)
 <dl>
