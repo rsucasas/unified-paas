@@ -65,7 +65,7 @@ public class Openshift2IT
 	
 	private boolean checkResult(eu.seaclouds.paas.Module m, String exeFunc, String operation, int expectedValue, int seconds)
 	{
-		/*for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			try
 			{
@@ -86,8 +86,8 @@ public class Openshift2IT
 			}
 		}
 
-		return false;*/
-		return true;
+		return false;
+		//return true;
 	}
 
 

@@ -1,7 +1,7 @@
 # unified-paas
 SeaClouds Unified PaaS Library
 
-## Usage ##
+## Usage
 1. Compile needed projects
 
 * https://github.com/rosogon/heroku-java-client. Compile with `mvn install –Dmaven.test.skip`. 
@@ -14,24 +14,26 @@ SeaClouds Unified PaaS Library
 
 `curl http://localhost:8080/heroku/applications -X POST -F file=@"<warfile>" -F model='{"name":"samplewar"}' -H"Content-Type: multipart/form-data" -H"apikey:<heroku-api-key>"`
 
-### Integration tests ###
+### Integration tests
 
-##### Configuration #####
+##### Configuration
 * Set values in /library/src/test/resources/tests.config.properties
 
-##### Integration Tests #####
+##### Integration Tests
 * Execute tests: `mvn clean verify -P integration-test`
 
-## Java Client Libraries ##
-* Cloud Foundry:
-https://github.com/cloudfoundry/cf-java-client
+## Java Client Libraries
+Java client libraries used in the project:
 
-* Heroku:
-https://github.com/heroku/heroku.jar
+1. Cloud Foundry:
+..*https://github.com/cloudfoundry/cf-java-client
 
-* Openshift v2 (used by Openshift Online):
-https://github.com/openshift/openshift-java-client 
+2. Heroku:
+..*https://github.com/heroku/heroku.jar
 
-* Openshift v3 (new version for the version 3 architecture of OpenShift based on Kubernetes: OpenShift Enterprise, local Openshift installations ...):
-https://github.com/openshift/openshift-restclient-java
+3. Openshift v2 (used by Openshift Online):
+..*https://github.com/openshift/openshift-java-client 
+
+4. Openshift v3 (new version for the version 3 architecture of OpenShift based on Kubernetes: OpenShift Enterprise, local Openshift installations ...):
+..*https://github.com/openshift/openshift-restclient-java
 
