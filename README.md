@@ -30,7 +30,13 @@ Java client libraries used in the project:
   <dt>Description</dt>
   <dd></dd>
   <dt>Features</dt>
-  <dd></dd>
+  <dd>
+| Feature        | Supported?           | Comments  |
+| ------------- |:-------------:| :-----|
+| Deployment      | YES  | .. |
+| Scaling      | YES       |   .. |
+| Services |   YES     |    .. |
+  </dd>
   <dt>Usage (maven - pom.xml)</dt>
   <dd>
 ```
@@ -38,7 +44,7 @@ Java client libraries used in the project:
     <groupId>org.cloudfoundry</groupId>
     <artifactId>cloudfoundry-client-lib</artifactId>
     <version>${cf-version}</version>
-	</dependency>
+  </dependency>
 ```
   </dd>
 </dl>
@@ -84,10 +90,10 @@ Java client libraries used in the project:
   <dd>
 ```
   <dependency>
-		<groupId>com.openshift</groupId>
-		<artifactId>openshift-java-client</artifactId>
-		<version>${openshift2-version}</version>
-	</dependency>
+    <groupId>com.openshift</groupId>
+    <artifactId>openshift-java-client</artifactId>
+    <version>${openshift2-version}</version>
+  </dependency>
 ```
   </dd>
 </dl>
