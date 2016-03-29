@@ -29,14 +29,14 @@ public class TestConfigProperties
 	private String heroku_apiKey = "";
 	private String heroku_user = "";
 	private String heroku_password = "";
-    //CLOUD FOUNDRY
+    // CLOUD FOUNDRY
 	private String cf_user = "";
 	private String cf_password = "";
 	private String cf_api = "";
 	private String cf_org = "";
 	private String cf_space = "";
 	private boolean cf_trustSelfSignedCerts = true;
-	//OPENSHIFT
+	// OPENSHIFT
 	private String op_user = "";
 	private String op_password = "";
 	
