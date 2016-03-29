@@ -87,7 +87,7 @@ public class HerokuIT
 		return false;
 	}
 	
-	
+
     @Test
     public void deploy() 
     {
@@ -136,7 +136,7 @@ public class HerokuIT
          	assertTrue(true);
     }
     
-    
+   
     @Test (dependsOnMethods={"start"})
     public void scaleUp() 
     {
@@ -217,6 +217,6 @@ public class HerokuIT
         	assertTrue(true);
         }
     }
-	
+
 	
 }

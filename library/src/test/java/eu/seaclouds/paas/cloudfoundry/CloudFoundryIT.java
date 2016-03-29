@@ -48,6 +48,9 @@ public class CloudFoundryIT
 		logger.info("### INTEGRATION TESTS > CloudFoundry ...");
         // login / connect to PaaS
         PaasClient client = new PaasClientFactory().getClient("cloudfoundry");
+        
+        logger.info("### INTEGRATION TESTS > CloudFoundry user ..." + TestConfigProperties.getInstance().getCf_user());
+        logger.info("### INTEGRATION TESTS > CloudFoundry psswd ..." + TestConfigProperties.getInstance().getCf_password());
 
 		session = client.getSession(new Credentials.ApiUserPasswordOrgSpaceCredentials(
 				TestConfigProperties.getInstance().getCf_api(), 
@@ -85,7 +88,7 @@ public class CloudFoundryIT
 		return false;
 	}
 	
-	
+
     @Test
     public void deploy() 
     {

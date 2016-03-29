@@ -1,5 +1,6 @@
 package eu.seaclouds.paas.openshift2;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -84,8 +85,41 @@ public class Module implements eu.seaclouds.paas.Module
 	@Override
 	public List<String> getServices()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		boolean isApp = false;
+    	String serv = "";
+		ArrayList<String> lServices = new ArrayList<String>(3);
+		
+		Collection<IGearGroup> res = app.getGearGroups();
+        for (IGearGroup g : res)
+        {
+        	for (ICartridge cres2 : g.getCartridges())
+        	{
+        		
+        		if (cres2.getName().equalsIgnoreCase(app.getCartridge().getName()))
+        		{
+        			for (IGear ig : g.getGears())
+    	        	{
+    	        		if (ig.getState().getState().equalsIgnoreCase("STARTED"))
+    	        		{
+    	        			isApp = true;
+    	        		}
+    	        	}
+        			break;
+        		}
+        		else 
+        		{
+        			serv = cres2.getName();
+        		}
+        	}
+        	
+        	if (!isApp)
+        	{
+        		lServices.add(serv);
+        	}
+        	isApp = false;
+        }
+		
+		return lServices;
 	}
 
 	

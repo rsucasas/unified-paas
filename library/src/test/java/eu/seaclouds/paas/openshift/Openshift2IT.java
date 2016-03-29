@@ -4,7 +4,6 @@ import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
 import static org.testng.AssertJUnit.fail;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeTest;
@@ -40,7 +39,7 @@ public class Openshift2IT
 
 	
 	// Application
-	private static final String APP_NAME = "seacloudsTestsOS01";
+	private static final String APP_NAME = "rsucasastest01";
 	private static final String GIT_APP_URL = "https://github.com/OpenMEAP/openshift-openmeap-quickstart";
 	private static final String SERV_NAME = "mysql-5.5";
 
@@ -87,7 +86,6 @@ public class Openshift2IT
 		}
 
 		return false;
-		//return true;
 	}
 
 
@@ -96,7 +94,7 @@ public class Openshift2IT
     {
     	logger.info("### TEST > Openshift 2 > deploy()");
 
-    	Module m = session.deploy("rsucasasTest01", new DeployParameters(GIT_APP_URL, IStandaloneCartridge.NAME_JBOSSEWS));
+    	Module m = session.deploy(APP_NAME, new DeployParameters(GIT_APP_URL, IStandaloneCartridge.NAME_JBOSSEWS));
 
         assertNotNull(m);
         logger.info(">> " + String.format("name='%s',  url='%s'", m.getName(), m.getUrl()));
@@ -180,10 +178,10 @@ public class Openshift2IT
         m = session.getModule(APP_NAME);
         assertEquals(1, m.getServices().size());
         
-        logger.info("### TEST > Openshift 2 > bindToService() > environment values...");
+        /*logger.info("### TEST > Openshift 2 > bindToService() > environment values...");
         for (Map.Entry<String, Object> entry : m.getmEnv().entrySet()) {
             logger.info("### TEST > Openshift 2 > bindToService() > " + entry.getKey() + " / " + entry.getValue().toString());
-        }
+        }*/
     }
 
     

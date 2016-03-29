@@ -253,8 +253,11 @@ public class Openshift2Connector
 		{
 			for (IEmbeddableCartridge cartridge : app.getEmbeddedCartridges())
 			{
-				app.removeEmbeddedCartridge(cartridge);
-				return true;
+				if (cartridge.getName().equalsIgnoreCase(serviceName))
+				{
+					app.removeEmbeddedCartridge(cartridge);
+					return true;
+				}
 			}
 		}
 		
