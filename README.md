@@ -28,7 +28,7 @@ Java client libraries used in the project:
 + **Cloud Foundry**:  [Cloud Foundry Java Client](https://github.com/cloudfoundry/cf-java-client)
 <dl>
   <dt>Description</dt>
-  <dd></dd>
+  <dd>The cf-java-client project is a Java language binding for interacting with a Cloud Foundry instance (including PaaS providers like Pivotal, Bluemix etc.).</dd>
   <dt>Features</dt>
 </dl>
 
@@ -47,7 +47,8 @@ Java client libraries used in the project:
 + **Heroku**:  [Heroku JAR](https://github.com/heroku/heroku.jar) & [heroku-maven-plugin](https://github.com/heroku/heroku-maven-plugin)
 <dl>
   <dt>Description</dt>
-  <dd></dd>
+  <dd>Heroku JAR: The Heroku JAR is a java artifact that provides a simple wrapper for the Heroku REST API. The Heroku REST API allows Heroku users to manage their accounts, applications, addons, and other aspects related to Heroku.</dd>
+  <dd>heroku-maven-plugin: This plugin is used to deploy Java applications directly to Heroku without pushing to a Git repository. This is can be useful when deploying from a CI server, deploying pre-built Jar or War files.</dd>
   <dt>Features</dt>
 </dl>
 
@@ -67,7 +68,7 @@ Java client libraries used in the project:
 + **OpenShift v2**:  [OpenShift Java Client](https://github.com/openshift/openshift-java-client) (used by Openshift Online / only for Version 2)
 <dl>
   <dt>Description</dt>
-  <dd></dd>
+  <dd>Java client for the OpenShift REST API. This client is used by JBoss Tools for OpenShift 2.x.</dd>
   <dt>Features</dt>
 </dl>
 
