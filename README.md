@@ -32,25 +32,12 @@ Java client libraries used in the project:
   <dt>Features</dt>
 </dl>
 
-| Client        | Version           | URL  |
+| Feature        | Supported?           | Comments  |
 | ------------- |:-------------:| :-----|
-| Cloud Foundry      | 1.1.3  | https://github.com/cloudfoundry/cf-java-client |
-| Heroku      | 0.16 / 0.5.7 *       |   https://github.com/heroku/heroku.jar |
-| Openshift v2 |   2.7.0.Final     |    https://github.com/openshift/openshift-java-client |
-| Openshift v3 |   -     |    https://github.com/openshift/openshift-restclient-java |
+| Deployment      | YES  | .. |
+| Scaling      | YES       |   .. |
+| Services |   YES     |    .. |
 
-<dl>
-  <dt>Usage (maven - pom.xml)</dt>
-  <dd>
-```
-  <dependency>
-    <groupId>org.cloudfoundry</groupId>
-    <artifactId>cloudfoundry-client-lib</artifactId>
-    <version>${cf-version}</version>
-  </dependency>
-```
-  </dd>
-</dl>
 + [Heroku](https://github.com/heroku/heroku.jar)
 <dl>
   <dt>Description</dt>
