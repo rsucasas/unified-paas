@@ -30,13 +30,13 @@ Java client libraries used in the project:
   <dt>Description</dt>
   <dd></dd>
   <dt>Features</dt>
-  <dd>
+</dl>
 | Feature        | Supported?           | Comments  |
 | ------------- |:-------------:| :-----|
 | Deployment      | YES  | .. |
 | Scaling      | YES       |   .. |
 | Services |   YES     |    .. |
-  </dd>
+<dl>
   <dt>Usage (maven - pom.xml)</dt>
   <dd>
 ```
