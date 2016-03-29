@@ -28,6 +28,11 @@ Java client libraries used in the project:
 + [Cloud Foundry](https://github.com/cloudfoundry/cf-java-client)
 ```
 https://github.com/cloudfoundry/cf-java-client
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
 ```
 + [Heroku](https://github.com/heroku/heroku.jar)
 ```
