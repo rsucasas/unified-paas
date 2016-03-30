@@ -1,7 +1,7 @@
 # unified-paas
 SeaClouds Unified PaaS Library
-
-## Usage
+---
+## 1. Usage
 1. Compile needed projects
 
 * https://github.com/rosogon/heroku-java-client. Compile with `mvn install –Dmaven.test.skip`. 
@@ -21,8 +21,8 @@ SeaClouds Unified PaaS Library
 
 ##### Integration Tests
 * Execute tests: `mvn clean verify -P integration-test`
-
-## Java Client Libraries
+---
+## 2. Java Client Libraries
 Java client libraries used in the project:
 
 #### Cloud Foundry
@@ -54,11 +54,11 @@ Java client libraries used in the project:
 
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
-| Application deployment      | YES  | Tested with **Java** and **PHP** apps |
-| Start / Stop / Remove |   YES     |   - |
-| Scaling capabilities     | YES       |  Can scale number of instances, disk and RAM |
-| Services management |   YES     |   Tested with **ClearDB** from Pivotal |
-| Environment variables management |   YES     |   Read & Write |
+| Application deployment      | :white_check_mark:  | Tested with **Java** and **PHP** apps |
+| Start / Stop / Remove |   :white_check_mark:     |   - |
+| Scaling capabilities     | :white_check_mark:       |  Can scale number of instances, disk and RAM |
+| Services management |   :white_check_mark:     |   Tested with **ClearDB** from Pivotal |
+| Environment variables management |   :white_check_mark:     |   Read & Write |
 
 | Limitations  |
 | ------------- ||
@@ -76,11 +76,11 @@ Java client libraries used in the project:
 
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
-| Application deployment      | YES  | Tested with **Java** |
-| Start / Stop / Remove |   YES     |   - |
-| Scaling capabilities     | YES       |  Can scale number of instances |
-| Services management |   YES     |   Tested with **ClearDB** from Pivotal |
-| Environment variables management |   YES     |   Read & Write |
+| Application deployment      | :white_check_mark:  | Tested with **Java** |
+| Start / Stop / Remove |   :white_check_mark:     |   - |
+| Scaling capabilities     | :white_check_mark:       |  Can scale number of instances |
+| Services management |   :white_check_mark:     |   Tested with **ClearDB** from Pivotal |
+| Environment variables management |   :white_check_mark:     |   Read & Write |
 
 | Limitations  |
 | ------------- ||
@@ -96,11 +96,11 @@ Java client libraries used in the project:
 
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
-| Application deployment      | YES  | Only from GIT |
-| Start / Stop / Remove |   YES     |   - |
-| Scaling capabilities     | YES       |  Can scale number of instances |
-| Services management |   YES     |   Tested with **MySQL** from [Openshift Online](https://openshift.redhat.com) |
-| Environment variables management |   -     |  -  |
+| Application deployment      | :white_check_mark:  | Only from GIT |
+| Start / Stop / Remove |   :white_check_mark:     |   - |
+| Scaling capabilities     | :white_check_mark:       |  Can scale number of instances |
+| Services management |   :white_check_mark:     |   Tested with **MySQL** from [Openshift Online](https://openshift.redhat.com) |
+| Environment variables management |   :x:     |  -  |
 
 | Limitations  |
 | ------------- ||
