@@ -108,10 +108,10 @@ Java client libraries used in the project:
 
 ---
 
-| Client        | Version used  | Last version (at 2016.03.29) | License | Comments  |
-| ------------- |:-------------:| :---------------------------:| :-------| :---------|
-| Cloud Foundry | 1.1.3         | | |https://github.com/cloudfoundry/cf-java-client |
-| :new: Cloud Foundry | -         | | |https://github.com/cloudfoundry/cf-java-client |
-| Heroku        | 0.16 / 0.5.7 *| | | https://github.com/heroku/heroku.jar |
-| Openshift v2  | 2.7.0.Final   | | | https://github.com/openshift/openshift-java-client |
-| :new: Openshift v3  | -             | | | https://github.com/openshift/openshift-restclient-java |
+| Client        | Version used  | License | Comments  |
+| ------------- |:-------------:| :-------| :---------|
+| Cloud Foundry | 1.1.3         | -       | -       |
+| :new: Cloud Foundry | -       | -       | -       |
+| Heroku        | 0.16 / 0.5.7 *| -       | -       |
+| Openshift v2  | 2.7.0.Final   | -       | -       |
+| :new: Openshift v3  | -       | -       | -       |
