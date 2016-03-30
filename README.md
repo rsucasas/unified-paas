@@ -87,7 +87,7 @@ Java client libraries used in the project:
 
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
-| Application deployment      | :white_check_mark:  | Only from GIT |
+| Application deployment      | :white_check_mark:  | :heavy_exclamation_mark: Only from GIT |
 | Start / Stop / Remove |   :white_check_mark:     |   :heavy_minus_sign: |
 | Scaling capabilities     | :white_check_mark:       |  Can scale number of instances |
 | Services management |   :white_check_mark:     |   Tested with **MySQL** from [Openshift Online](https://openshift.redhat.com) |
