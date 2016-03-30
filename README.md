@@ -38,7 +38,7 @@ Java client libraries used in the project:
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
 | Application deployment      | :white_check_mark:  | Tested with **Java** and **PHP** apps |
-| Start / Stop / Remove |   :white_check_mark:     |   - |
+| Start / Stop / Remove |   :white_check_mark:     |   :heavy_minus_sign: |
 | Scaling capabilities     | :white_check_mark:       |  Can scale number of instances, disk and RAM |
 | Services management |   :white_check_mark:     |   Tested with **ClearDB** from Pivotal |
 | Environment variables management |   :white_check_mark:     |   Read & Write |
@@ -68,7 +68,7 @@ Java client libraries used in the project:
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
 | Application deployment      | :white_check_mark:  | Tested with **Java** |
-| Start / Stop / Remove |   :white_check_mark:     |   - |
+| Start / Stop / Remove |   :white_check_mark:     |   :heavy_minus_sign: |
 | Scaling capabilities     | :white_check_mark:       |  Can scale number of instances |
 | Services management |   :white_check_mark:     |   Tested with **ClearDB** from Pivotal |
 | Environment variables management |   :white_check_mark:     |   Read & Write |
@@ -88,10 +88,10 @@ Java client libraries used in the project:
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
 | Application deployment      | :white_check_mark:  | Only from GIT |
-| Start / Stop / Remove |   :white_check_mark:     |   - |
+| Start / Stop / Remove |   :white_check_mark:     |   :heavy_minus_sign: |
 | Scaling capabilities     | :white_check_mark:       |  Can scale number of instances |
 | Services management |   :white_check_mark:     |   Tested with **MySQL** from [Openshift Online](https://openshift.redhat.com) |
-| Environment variables management |   :x:     |  -  |
+| Environment variables management |   :x:     |  :heavy_minus_sign:  |
 
 | Limitations / Comments |
 | ------------- ||
