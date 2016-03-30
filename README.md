@@ -25,6 +25,7 @@ SeaClouds Unified PaaS Library
 ## Java Client Libraries
 Java client libraries used in the project:
 
+#### Cloud Foundry
 + **Cloud Foundry**:  [Cloud Foundry Java Client](https://github.com/cloudfoundry/cf-java-client)
 <dl>
   <dt>Description</dt>
@@ -43,7 +44,28 @@ Java client libraries used in the project:
 | Limitations  |
 | ------------- ||
 | - |
+
++ **Cloud Foundry** (new version):  [Cloud Foundry Java Client](https://github.com/cloudfoundry/cf-java-client)
+<dl>
+  <dt>Description</dt>
+  <dd>The cf-java-client project is a Java language binding for interacting with a Cloud Foundry instance (including PaaS providers like Pivotal, Bluemix etc.).</dd>
+  <dt>Features</dt>
+</dl>
+
+| Feature       | Supported?    | Comments  |
+| ------------- |:-------------:|:-----|
+| Application deployment      | YES  | Tested with **Java** and **PHP** apps |
+| Start / Stop / Remove |   YES     |   - |
+| Scaling capabilities     | YES       |  Can scale number of instances, disk and RAM |
+| Services management |   YES     |   Tested with **ClearDB** from Pivotal |
+| Environment variables management |   YES     |   Read & Write |
+
+| Limitations  |
+| ------------- ||
+| - |
+ 
 ---
+#### Heroku
 + **Heroku**:  [Heroku JAR](https://github.com/heroku/heroku.jar) & [heroku-maven-plugin](https://github.com/heroku/heroku-maven-plugin)
 <dl>
   <dt>Description</dt>
@@ -64,7 +86,7 @@ Java client libraries used in the project:
 | ------------- ||
 | - |
 ---
-
+#### OpenShift
 + **OpenShift v2**:  [OpenShift Java Client](https://github.com/openshift/openshift-java-client) (used by Openshift Online / only for Version 2)
 <dl>
   <dt>Description</dt>
