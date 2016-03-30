@@ -35,11 +35,11 @@ Java client libraries used in the project:
 
 | Feature       | Supported?    | Comments  |
 | ------------- |:-------------:|:-----|
-| Application deployment      | YES  | Tested with **Java** and **PHP** apps |
-| Start / Stop / Remove |   YES     |   - |
-| Scaling capabilities     | YES       |  Can scale number of instances, disk and RAM |
-| Services management |   YES     |   Tested with **ClearDB** from Pivotal |
-| Environment variables management |   YES     |   Read & Write |
+| Application deployment      | :white_check_mark:  | Tested with **Java** and **PHP** apps |
+| Start / Stop / Remove |   :white_check_mark:     |   - |
+| Scaling capabilities     | :white_check_mark:       |  Can scale number of instances, disk and RAM |
+| Services management |   :white_check_mark:     |   Tested with **ClearDB** from Pivotal |
+| Environment variables management |   :white_check_mark:     |   Read & Write |
 
 | Limitations  |
 | ------------- ||
