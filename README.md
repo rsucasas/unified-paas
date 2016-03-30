@@ -50,7 +50,7 @@ Java client libraries used in the project:
 + :new: **Cloud Foundry** (new version) :  [Cloud Foundry Java Client](https://github.com/cloudfoundry/cf-java-client)
 <dl>
   <dt>Description</dt>
-  <dd>The new version of the cf-java-client project is based on Java 8 and [Project Reactor](https://projectreactor.io/) (a "Reactive" design pattern).</dd>
+  <dd>The new version of the cf-java-client project is based on Java 8 and [Project Reactor](https://projectreactor.io/) (a second-generation Reactive library for building non-blocking applications on the JVM based on the Reactive Streams Specification).</dd>
   <dt>Features</dt>
   <dd>-Not implemented-</dd>
 </dl>
