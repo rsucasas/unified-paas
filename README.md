@@ -103,18 +103,18 @@ Java client libraries used in the project:
   <dt>Description</dt>
   <dd>-Not implemented-</dd>
   <dt>Features</dt>
-  <dd>-</dd>
+  <dd>:heavy_minus_sign:</dd>
 </dl>
 
 ---
 
 | Client        | Version used  | License | Comments  |
 | ------------- |:-------------:| :-------| :---------|
-| Cloud Foundry | 1.1.3         | Apache License v2       | -       |
-| :new: Cloud Foundry | -       | Apache License v2       | -       |
-| Heroku        | 0.16 / 0.5.7**| - / MIT License**       | -       |
-| Openshift v2  | 2.7.0.Final   | Eclipse Public License v1.0       | -       |
-| :new: Openshift v3  | -       | -       | -       |
+| Cloud Foundry | 1.1.3         | Apache License v2       | :heavy_minus_sign:       |
+| :new: Cloud Foundry | :heavy_minus_sign:       | Apache License v2       | :heavy_minus_sign:       |
+| Heroku        | 0.16 / 0.5.7**| :heavy_minus_sign: / MIT License**       | :heavy_minus_sign:       |
+| Openshift v2  | 2.7.0.Final   | Eclipse Public License v1.0       | :heavy_minus_sign:       |
+| :new: Openshift v3  | :heavy_minus_sign:       | :heavy_minus_sign:       | :heavy_minus_sign:       |
 
 
 ** heroku-maven-plugin
