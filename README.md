@@ -43,9 +43,9 @@ Java client libraries used in the project:
 | Services management |   :white_check_mark:     |   Tested with **ClearDB** from Pivotal |
 | Environment variables management |   :white_check_mark:     |   Read & Write |
 
-| Limitations  |
+| Limitations / Comments |
 | ------------- ||
-| - |
+| :heavy_minus_sign: |
 
 + :new: **Cloud Foundry** (new version) :  [Cloud Foundry Java Client](https://github.com/cloudfoundry/cf-java-client)
 <dl>
@@ -73,9 +73,9 @@ Java client libraries used in the project:
 | Services management |   :white_check_mark:     |   Tested with **ClearDB** from Pivotal |
 | Environment variables management |   :white_check_mark:     |   Read & Write |
 
-| Limitations  |
+| Limitations / Comments |
 | ------------- ||
-| - |
+| :heavy_minus_sign: |
 ---
 #### OpenShift
 + **OpenShift v2**:  [OpenShift Java Client](https://github.com/openshift/openshift-java-client) (used by Openshift Online / only for Version 2)
@@ -93,9 +93,9 @@ Java client libraries used in the project:
 | Services management |   :white_check_mark:     |   Tested with **MySQL** from [Openshift Online](https://openshift.redhat.com) |
 | Environment variables management |   :x:     |  -  |
 
-| Limitations  |
+| Limitations / Comments |
 | ------------- ||
-| - |
+| :heavy_minus_sign: |
 ---
 
 + :new: [Openshift v3](https://github.com/openshift/openshift-restclient-java)  (new version for the version 3 architecture of OpenShift based on Kubernetes: OpenShift Enterprise, local Openshift installations ...)
@@ -112,7 +112,7 @@ Java client libraries used in the project:
 | ------------- |:-------------:| :-------| :---------|
 | Cloud Foundry | 1.1.3         | Apache License v2       | -       |
 | :new: Cloud Foundry | -       | Apache License v2       | -       |
-| Heroku        | 0.16 / 0.5.7**| MIT License**       | -       |
+| Heroku        | 0.16 / 0.5.7**| - / MIT License**       | -       |
 | Openshift v2  | 2.7.0.Final   | Eclipse Public License v1.0       | -       |
 | :new: Openshift v3  | -       | -       | -       |
 
