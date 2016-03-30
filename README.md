@@ -110,8 +110,11 @@ Java client libraries used in the project:
 
 | Client        | Version used  | License | Comments  |
 | ------------- |:-------------:| :-------| :---------|
-| Cloud Foundry | 1.1.3         | -       | -       |
-| :new: Cloud Foundry | -       | -       | -       |
-| Heroku        | 0.16 / 0.5.7 *| -       | -       |
-| Openshift v2  | 2.7.0.Final   | -       | -       |
+| Cloud Foundry | 1.1.3         | Apache License v2       | -       |
+| :new: Cloud Foundry | -       | Apache License v2       | -       |
+| Heroku        | 0.16 / 0.5.7**| MIT License**       | -       |
+| Openshift v2  | 2.7.0.Final   | Eclipse Public License v1.0       | -       |
 | :new: Openshift v3  | -       | -       | -       |
+
+
+** heroku-maven-plugin
