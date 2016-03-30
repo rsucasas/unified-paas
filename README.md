@@ -1,5 +1,6 @@
 # unified-paas
 SeaClouds Unified PaaS Library
+
 ---
 ## 1. Usage
 1. Compile needed projects
@@ -21,6 +22,7 @@ SeaClouds Unified PaaS Library
 
 ##### Integration Tests
 * Execute tests: `mvn clean verify -P integration-test`
+
 ---
 ## 2. Java Client Libraries
 Java client libraries used in the project:
