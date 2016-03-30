@@ -47,24 +47,13 @@ Java client libraries used in the project:
 | ------------- ||
 | - |
 
-+ **Cloud Foundry** (new version):  [Cloud Foundry Java Client](https://github.com/cloudfoundry/cf-java-client)
++ :new: **Cloud Foundry** (new version) :  [Cloud Foundry Java Client](https://github.com/cloudfoundry/cf-java-client)
 <dl>
   <dt>Description</dt>
-  <dd>The cf-java-client project is a Java language binding for interacting with a Cloud Foundry instance (including PaaS providers like Pivotal, Bluemix etc.).</dd>
+  <dd>The new version of the cf-java-client project is based on Java 8 and [Project Reactor](https://projectreactor.io/) (a "Reactive" design pattern).</dd>
   <dt>Features</dt>
+  <dd>-Not implemented-</dd>
 </dl>
-
-| Feature       | Supported?    | Comments  |
-| ------------- |:-------------:|:-----|
-| Application deployment      | :white_check_mark:  | Tested with **Java** and **PHP** apps |
-| Start / Stop / Remove |   :white_check_mark:     |   - |
-| Scaling capabilities     | :white_check_mark:       |  Can scale number of instances, disk and RAM |
-| Services management |   :white_check_mark:     |   Tested with **ClearDB** from Pivotal |
-| Environment variables management |   :white_check_mark:     |   Read & Write |
-
-| Limitations  |
-| ------------- ||
-| - |
  
 ---
 #### Heroku
@@ -109,7 +98,7 @@ Java client libraries used in the project:
 | - |
 ---
 
-+ [Openshift v3](https://github.com/openshift/openshift-restclient-java)  (new version for the version 3 architecture of OpenShift based on Kubernetes: OpenShift Enterprise, local Openshift installations ...)
++ :new: [Openshift v3](https://github.com/openshift/openshift-restclient-java)  (new version for the version 3 architecture of OpenShift based on Kubernetes: OpenShift Enterprise, local Openshift installations ...)
 <dl>
   <dt>Description</dt>
   <dd>-Not implemented-</dd>
